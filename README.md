@@ -1,2 +1,2 @@
-# bolsa-ipasco
-Bolsa laboral actualizada IDEX PASCO
+# pruebas
+Modelo inicial biblioteca virtual
