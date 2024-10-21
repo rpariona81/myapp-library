@@ -24,8 +24,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = '';
-$config['base_url'] =  'http://'.$_SERVER['HTTP_HOST'];
+//$config['base_url'] =  'http://'.$_SERVER['HTTP_HOST'];
 
+$root=(isset($_SERVER['HTTPS']) ? "https://" : "http://").$_SERVER['HTTP_HOST'];
+$root.= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+$config['base_url'] = $root;
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -385,7 +388,7 @@ $config['encryption_key'] = getenv('APP_KEY')??'';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-
+/*
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'bib_session';
 $config['sess_samesite'] = 'Bibliox';
@@ -394,8 +397,8 @@ $config['sess_save_path'] = sys_get_temp_dir();
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 3000;
 $config['sess_regenerate_destroy'] = FALSE;
+*/
 
-/*
 $config['sess_driver'] = getenv('SESSION_DRIVER');
 $config['sess_cookie_name'] = 'bib_session';
 $config['sess_samesite'] = 'Bibliox';
@@ -404,7 +407,7 @@ $config['sess_save_path'] = getenv('SESSION_PATH');
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 3000;
 $config['sess_regenerate_destroy'] = FALSE;
-*/
+
 
 /*
 |--------------------------------------------------------------------------
