@@ -31,7 +31,7 @@ CREATE TABLE `t_ebooks` (
   `ebook_author` varchar(255) DEFAULT NULL,
   `ebook_editorial` varchar(255) DEFAULT NULL,
   `ebook_year` char(4) DEFAULT NULL,
-  `ebook_pages` tinyint(4) DEFAULT NULL,
+  `ebook_pages` mediumint(8) DEFAULT NULL,
   `ebook_front_page` varchar(255) DEFAULT NULL,
   `ebook_details` varchar(255) DEFAULT NULL,
   `ebook_url` varchar(255) DEFAULT NULL,

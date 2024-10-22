@@ -11,6 +11,7 @@ class AdminController extends CI_Controller
         $this->load->model('offerjobeloquent');
         $this->load->model('postulatejobeloquent');
         $this->load->model('usereloquent');
+        $this->load->model('careereloquent');
         $this->load->model('admineloquent');
         $this->load->model('bookeloquent');
         $this->form_validation->set_message('no_repetir_username', 'Existe otro registro con el mismo %s');
