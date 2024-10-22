@@ -57,7 +57,7 @@
                         <tbody>
                             <?php foreach ($query as $item) : ?>
                                 <tr class="align-middle">
-                                    <td class="align-middle px-auto"><?= str_pad((int)$item->code, 5, '0', STR_PAD_LEFT); ?></td>
+                                    <td class="align-middle px-auto"><?= str_pad((int)$item->ebook_code, 5, '0', STR_PAD_LEFT); ?></td>
                                     <td class="d-flex align-items-center">
                                         <!--begin:: Avatar -->
                                         <div class="symbol symbol-50px overflow-hidden me-3">
