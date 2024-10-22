@@ -81,13 +81,14 @@
 
                         </div>
                     </div>
-
-                    <div class="col-md-4">
+                    <div class="col-md-1"></div>
+                
+                    <div class="col-md-3">
 
                         <label>Archivo</label>
                         <div></div>
                         <strong>Descarga:</strong>
-                        <a class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="left" title="Descargar" target="_blank" download="<?= $item->ebook_url; ?>" href="<?= base_url('/uploads/pdf/' . $item->ebook_file); ?>">
+                        <a class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="left" title="Descargar" target="_blank" download="<?= $item->ebook_file; ?>" href="<?= base_url('uploads/pdf/' . $item->ebook_file); ?>">
                             <i class="fa fa-file-pdf" title="<?= $item->ebook_file ?>"></i>
                         </a>
 
