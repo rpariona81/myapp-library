@@ -53,9 +53,9 @@ class BookEloquent extends BaseModel
         //https://blog.devgenius.io/how-to-find-the-number-of-days-between-two-dates-in-php-1404748b1e84
         //return date_diff(date_create('now'),date_create($this->date_vigency))->format('%R%a days');return date_diff(date_create('now'),date_create($this->date_vigency))->format('%R%a days');
         if ($this->status) {
-            return 'Activa';
+            return 'Disponible';
         } else {
-            return 'Inactiva';
+            return 'No disponible';
         }
     }
 
@@ -133,5 +133,79 @@ class BookEloquent extends BaseModel
             ->get();
 
         return $data;
+    }
+
+    public static function getEbooksList($catalog = NULL)
+    {
+        try {
+            if (!is_null($catalog)) {
+                $data = BookEloquent::leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
+                    ->select(
+                        't_ebooks.id',
+                        't_ebooks.ebook_code',
+                        't_ebooks.ebook_isbn',
+                        't_ebooks.ebook_title',
+                        't_ebooks.ebook_alias',
+                        't_ebooks.ebook_display',
+                        't_ebooks.ebook_type',
+                        't_ebooks.ebook_author',
+                        't_ebooks.ebook_editorial',
+                        't_ebooks.status',
+                        't_ebooks.ebook_year',
+                        't_ebooks.ebook_pages',
+                        't_ebooks.ebook_front_page',
+                        't_ebooks.ebook_details',
+                        't_ebooks.ebook_url',
+                        't_ebooks.ebook_file',
+                        't_ebooks.created_at',
+                        't_catalogs.catalog_name',
+                        't_catalogs.catalog_display'
+                    )
+                    ->where('catalog_id', '=', $catalog)
+                    ->get();
+                return $data;
+            }else{
+                $data = BookEloquent::leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
+                    ->select(
+                        't_ebooks.id',
+                        't_ebooks.ebook_code',
+                        't_ebooks.ebook_isbn',
+                        't_ebooks.ebook_title',
+                        't_ebooks.ebook_alias',
+                        't_ebooks.ebook_display',
+                        't_ebooks.ebook_type',
+                        't_ebooks.ebook_author',
+                        't_ebooks.ebook_editorial',
+                        't_ebooks.status',
+                        't_ebooks.ebook_year',
+                        't_ebooks.ebook_pages',
+                        't_ebooks.ebook_front_page',
+                        't_ebooks.ebook_details',
+                        't_ebooks.ebook_url',
+                        't_ebooks.ebook_file',
+                        't_ebooks.created_at',
+                        't_catalogs.catalog_name',
+                        't_catalogs.catalog_display'
+                    )
+                    ->get();
+                return $data;
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
+    public static function getCatalogs()
+    {
+        $results = DB::table('t_catalogs')
+            ->select('id', 'catalog_display')
+            ->get();
+
+        $lista = array();
+        $lista[NULL] = 'Seleccionar catálogo';
+        foreach ($results as $result) {
+            $lista[$result->id] = $result->catalog_display;
+        }
+        return $lista;
     }
 }

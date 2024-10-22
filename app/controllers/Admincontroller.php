@@ -12,7 +12,7 @@ class AdminController extends CI_Controller
         $this->load->model('postulatejobeloquent');
         $this->load->model('usereloquent');
         $this->load->model('admineloquent');
-        $this->load->model('careereloquent');
+        $this->load->model('bookeloquent');
         $this->form_validation->set_message('no_repetir_username', 'Existe otro registro con el mismo %s');
         $this->form_validation->set_message('no_repetir_email', 'Existe otro registro con el mismo %s');
         $this->form_validation->set_message('no_repetir_document', 'Existe otro registro con el mismo %s');
@@ -36,8 +36,8 @@ class AdminController extends CI_Controller
             $data['offersjobsLast'] = OfferJobEloquent::getOffersjobsLast();
             $this->load->view('admin/templateAdmin', $data);
         } else {
-          $this->session->set_flashdata('error');
-          redirect('/login');
+            $this->session->set_flashdata('error');
+            redirect('/login');
         }
     }
 
@@ -862,7 +862,7 @@ class AdminController extends CI_Controller
     }
 
 
-/**
+    /**
      * CONTROL DE PROGRAMAS DE ESTUDIOS
      *  */
 
@@ -1008,13 +1008,13 @@ class AdminController extends CI_Controller
             $config['max_size']             = 8192;
             $config['file_name']            = round(microtime(true) * 1000);
             $config['remove_spaces']        = TRUE;
-            
+
             $this->load->library('upload', $config);
             $this->upload->overwrite = true;
             //print_r($_FILES);
             //print_r($this->upload->display_errors());
         }
-            /*if (!$this->upload->do_upload('modelocv')) {
+        /*if (!$this->upload->do_upload('modelocv')) {
                 //$error = array('error' => $this->upload->display_errors());
                 //print_r($error); die();
                 $data['error_string'] = 'Error de carga de archivo: ' . $this->upload->display_errors('', '');
@@ -1042,5 +1042,120 @@ class AdminController extends CI_Controller
         }*/
     }
 
+    public function verCatalogo()
+    {
+        if ($this->session->userdata('user_rol') == 'admin') {
+            $catalog_id = $this->input->post('catalog_id', true);
+            $data['selectValue'] = isset($catalog_id) ? $catalog_id : null;
+            $data['catalogs'] = BookEloquent::getCatalogs();
+            $data['query'] = BookEloquent::getEbooksList($catalog_id);
+            //$data['query'] = Offerjobeloquent::orderBy('date_publish','desc')->get();
+            //$data['query'] = Offerjobeloquent::all();
+            //$data['query'] = Offerjobeloquent::getOffersjobs();
+            $data['content'] = 'admin/catalogoTable';
+            $this->load->view('admin/templateAdmin', $data);
+        } else {
+            $this->session->set_flashdata('error');
+            redirect('/login');
+        }
+    }
+
+    public function editaEbook($id)
+    {
+        if ($this->session->userdata('user_rol') == 'admin') {
+            $data['item'] = BookEloquent::findOrFail($id);
+            $data['catalogs'] = BookEloquent::getCatalogs();
+            $data['content'] = 'admin/ebookEdit';
+            $this->load->view('admin/templateAdmin', $data);
+        } else {
+            $this->session->set_flashdata('error');
+            redirect('/login');
+        }
+    }
+
+    public function _do_upload_ebook()
+    {
+        $config['upload_path']          = FCPATH . 'uploads/pdf/';
+        $config['allowed_types']        = 'pdf';
+        $config['max_size']             = 1048576;
+        $config['file_name']            = round(microtime(true) * 10) . '_' . $_FILES['ebook_file']['name'];
+        $config['remove_spaces']        = TRUE;
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('ebook_file')) {
+            //$error = array('error' => $this->upload->display_errors());
+            //print_r($error); die();
+            $data['error_string'] = 'Error de carga de archivo: ' . $this->upload->display_errors('', '');
+            $data['status'] = 0;
+            //echo json_encode($data);
+            //$this->session->set_flashdata('flashError', 'Error de carga de archivo: ' . $this->upload->display_errors('', ''));
+            //redirect($_SERVER['REQUEST_URI'], 'refresh'); 
+            exit();
+            //return $data;
+            //return redirect()->to($_SERVER['HTTP_REFERER'], 'refresh');
+
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+            //print_r("Funciona!!");
+            //exit();
+            //$route_filecv = $data['full_path'];
+            //print_r($data);
+            //return $data;
+            //$this->load->view('upload_success', $data);
+        }
+        return $data;
+    }
+
+    public function actualizaEbook()
+    {
+        //$this->_validate();
+        //phpinfo();
+        date_default_timezone_set('America/Lima');
+        if ($this->session->userdata('user_rol') == 'admin') {
+            $id = $this->input->post('id');
+            $data = array(
+                'ebook_code' => $this->input->post('ebook_code') ? trim($this->input->post('ebook_code')) : '',
+                'ebook_isbn' => $this->input->post('ebook_isbn', true) ? trim($this->input->post('ebook_isbn', true)) : '',
+                'ebook_title' => $this->input->post('ebook_title', true) ? trim($this->input->post('ebook_title', true)) : '',
+                'ebook_details' => $this->input->post('ebook_details', true) ? htmlspecialchars($this->input->post('ebook_details', true)) : '',
+                'ebook_display' => $this->input->post('ebook_display', true) ? trim($this->input->post('ebook_display', true)) : '',
+                'ebook_type' => $this->input->post('ebook_type', true),
+                'ebook_author' => $this->input->post('ebook_author', true),
+                'ebook_editorial' => $this->input->post('ebook_editorial', true),
+                'ebook_year' => $this->input->post('ebook_year', true),
+                'ebook_pages' => $this->input->post('ebook_pages', true) ? $this->input->post('ebook_pages', true) : 9999,
+                'ebook_front_page' => $this->input->post('ebook_front_page', true),
+                'catalog_id' => $this->input->post('catalog_id', true)
+            );
+            //var_dump($_FILES);
+            //exit();
+            //$this->_do_upload_ebook();
+            //exit();
+            if (!empty($_FILES)) {
+                $upload = $this->_do_upload_ebook();
+                if ($upload) {
+                    $data['ebook_url'] = $upload['upload_data']['full_path'];
+                    $data['ebook_file'] = $upload['upload_data']['file_name'];
+                    $model = BookEloquent::findOrFail($id);
+                    $model->fill($data);
+                    $model->save($data);
+                    $this->session->set_flashdata('flashSuccess', 'Actualización exitosa.');
+                    redirect_back();
+                } else {
+                    $this->session->set_flashdata('flashError', 'Error de carga de archivo. Intente nuevamente.');
+                    //$this->viewConvocatoria($data['offer_id']);
+                    //redirect('users/convocatoria/' . $data['offer_id']);
+                    //redirect($_SERVER['REQUEST_URI'], 'refresh'); 
+                    exit();
+                    //return FALSE;
+                }
+            } else {
+                //redirect($_SERVER['REQUEST_URI'], 'refresh'); 
+                $this->session->set_flashdata('flashError', 'Error de carga de archivo.');
+                redirect_back();
+            }
+        }
+    }
 }
 /* End of file Controllername.php */

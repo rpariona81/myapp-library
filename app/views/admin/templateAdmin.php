@@ -158,7 +158,7 @@
                         </div>
 
                         <div class="menu-item">
-                            <a class="menu-link" href="<?= base_url('admin') . '/catalogos' ?>">
+                            <a class="menu-link" href="<?= base_url('admin') . '/catalogo' ?>">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotone/Design/Substract.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -174,7 +174,7 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">Catálogos</span>
+                                <span class="menu-title">Catálogo</span>
                             </a>
 
                         </div>
@@ -579,13 +579,14 @@
     <!--end::Page Custom Javascript-->
 
     <!-- Datatables js -->
+    <script src="<?= base_url() ?>assets/js/vendor/responsive.bootstrap5.min.js"></script>
+    
     <script src="<?= base_url() ?>assets/js/vendor/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/dataTables.bootstrap5.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/dataTables.responsive.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/dataTables.checkboxes.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/dataTables.keyTable.min.js"></script>
-    <script src="<?= base_url() ?>assets/js/vendor/responsive.bootstrap5.min.js"></script>
-
+    
     <script src="<?= base_url() ?>assets/js/vendor/dataTables.buttons.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/buttons.bootstrap5.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/buttons.html5.min.js"></script>
@@ -595,6 +596,7 @@
     <script src="<?= base_url() ?>assets/js/vendor/pdfmake.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/vfs_fonts.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/jszip.min.js"></script>
+    
 
 
     <script>
@@ -609,10 +611,10 @@
             var mytable = $("#datatable").DataTable({
                 deferRender: true,
                 responsive: true,
-                pageLength: 10,
+                pageLength: 5,
                 lengthMenu: [5, 10, 25, 50],
-                scrollH: true,
-                scrollX: true,
+                //scrollH: true,
+                //scrollX: true,
                 order: [],
                 //stateSave: true,
                 language: {

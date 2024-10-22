@@ -92,9 +92,9 @@ $route['admin/docentes'] = 'admincontroller/verDocentes';
 $route['admin/newdocente'] = 'admincontroller/nuevoDocente';
 $route['admin/docente/(:num)'] = 'admincontroller/editaDocente/$1';
 
-$route['admin/catalogos'] = 'admincontroller/verCatalogos';
-$route['admin/catalogos/(:num)'] = 'admincontroller/verCatalogos/$1';
-$route['admin/catalogo/(:num)'] = 'admincontroller/verCatalogo/$1';
+$route['admin/catalogo'] = 'admincontroller/verCatalogo';
+$route['admin/detalle/(:num)'] = 'admincontroller/verDetalle/$1';
+$route['admin/ebook/(:num)'] = 'admincontroller/editaEbook/$1';
 
 $route['admin/reportes'] = 'admincontroller/verReportes';
 $route['admin/reportes/(:num)'] = 'admincontroller/verReportes/$1';
