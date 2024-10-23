@@ -78,6 +78,10 @@ $route['user/credenciales'] = 'appcontroller/viewCredenciales';
 
 $route['user/descarga_cv'] = 'appcontroller/descargacv';
 
+$route['user/view/(:num)'] = 'appcontroller/viewpdf/$1';
+
+
+
 $route['admin'] = 'admincontroller/index';
 $route['admin/convocatorias'] = 'admincontroller/verConvocatorias';
 $route['admin/newconvocatoria'] = 'admincontroller/nuevaConvocatoria';

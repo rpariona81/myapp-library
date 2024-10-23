@@ -66,7 +66,8 @@
                 <div class="row pt-3">
                     <div class="col-md-12">
                         <label for="ebook_details">Detalles</label>
-                        <textarea class="form-control" id="ebook_details" name="ebook_details" value="<?= $item->ebook_details ?>">
+                        <textarea class="form-control" id="ebook_details" name="ebook_details">
+                            <?= htmlspecialchars($item->ebook_details) ?>
                         </textarea>
                     </div>
                 </div>
@@ -82,7 +83,7 @@
                         </div>
                     </div>
                     <div class="col-md-1"></div>
-                
+
                     <div class="col-md-3">
 
                         <label>Archivo</label>

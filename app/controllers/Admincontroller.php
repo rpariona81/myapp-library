@@ -1116,11 +1116,11 @@ class AdminController extends CI_Controller
         if ($this->session->userdata('user_rol') == 'admin') {
             $id = $this->input->post('id');
             $data = array(
-                'ebook_code' => $this->input->post('ebook_code') ? trim($this->input->post('ebook_code')) : '',
-                'ebook_isbn' => $this->input->post('ebook_isbn', true) ? trim($this->input->post('ebook_isbn', true)) : '',
-                'ebook_title' => $this->input->post('ebook_title', true) ? trim($this->input->post('ebook_title', true)) : '',
-                'ebook_details' => $this->input->post('ebook_details', true) ? htmlspecialchars($this->input->post('ebook_details', true)) : '',
-                'ebook_display' => $this->input->post('ebook_display', true) ? trim($this->input->post('ebook_display', true)) : '',
+                'ebook_code' => $this->input->post('ebook_code') ? trim($this->input->post('ebook_code')) : NULL,
+                'ebook_isbn' => $this->input->post('ebook_isbn', true) ? trim($this->input->post('ebook_isbn', true)) : NULL,
+                'ebook_title' => $this->input->post('ebook_title', true) ? trim($this->input->post('ebook_title', true)) : NULL,
+                'ebook_details' => $this->input->post('ebook_details', true) ? htmlspecialchars(trim($this->input->post('ebook_details', true))) : NULL,
+                'ebook_display' => $this->input->post('ebook_display', true) ? trim($this->input->post('ebook_display', true)) : NULL,
                 'ebook_type' => $this->input->post('ebook_type', true),
                 'ebook_author' => $this->input->post('ebook_author', true),
                 'ebook_editorial' => $this->input->post('ebook_editorial', true),
