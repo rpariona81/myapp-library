@@ -15,7 +15,7 @@
 
             <div id="my-pdf"></div>
 
-            <script src="https://unpkg.com/pdfobject"></script>
+            <script src="<?= base_url('assets/plugins/pdfobject/pdfobject.min.js')?>"></script>
             <script>PDFObject.embed("<?= base_url('uploads/pdf/' . $filepdf->ebook_file) ?>", "#my-pdf");</script>
             </div>
         </div>
