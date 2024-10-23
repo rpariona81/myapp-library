@@ -1,5 +1,9 @@
 <style>
-.pdfobject-container { height: 500px; border: 1px solid #ccc; }
+    .pdfobject-container {
+        height: 100vh;
+        height: 100dvh;
+        border: 1px solid #ccc;
+    }
 </style>
 
 <div class="card ">
@@ -13,10 +17,12 @@
             <!--begin::Illustration-->
             <div class="text-center px-4 mb-10">
 
-            <div id="my-pdf"></div>
+                <div id="my-pdf"></div>
 
-            <script src="<?= base_url('assets/plugins/pdfobject/pdfobject.min.js')?>"></script>
-            <script>PDFObject.embed("<?= base_url('uploads/pdf/' . $filepdf->ebook_file) ?>", "#my-pdf");</script>
+                <script src="<?= base_url('assets/plugins/pdfobject/pdfobject.min.js') ?>"></script>
+                <script>
+                    PDFObject.embed("<?= base_url('uploads/pdf/' . $filepdf->ebook_file) ?>", "#my-pdf");
+                </script>
             </div>
         </div>
     </div>
