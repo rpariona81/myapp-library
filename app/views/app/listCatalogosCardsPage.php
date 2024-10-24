@@ -1,3 +1,12 @@
+<style>
+    .pdfobject-container {
+        width: 100%;
+        height: 80vh;
+        height: 60dvh;
+        border: 1px solid #ccc;
+    }
+</style>
+
 <!--begin::Card-->
 <div class="card mb-7">
     <?= form_open('', array('id' => 'FRM_DATOS', 'class' => 'form-horizontal card-toolbar', 'onsubmit' => 'window.location.reload()')); ?>
@@ -47,7 +56,9 @@
                             <div class="card card-stretch card-bordered mb-5 shadow-sm">
                                 <div class="card-header border-0 py-5">
                                     <h2 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bolder fs-2"><font color="blue"><?= $item->ebook_display ?></font></span>
+                                        <span class="card-label fw-bolder fs-2">
+                                            <font color="blue"><?= $item->ebook_display ?></font>
+                                        </span>
                                     </h2>
                                 </div>
                                 <div class="card-body d-flex flex-column text-sm">
@@ -65,7 +76,12 @@
                                             <span>&nbsp;<?= $item->catalog_name ?></span>
                                         </li>
                                     </ul>
-                                    <a type="button" class="align-self-end btn btn-lg btn-block btn-danger" style="margin-top: auto;" href="<?= base_url('/user/ebook/' . $item->id); ?>"><strong>Ver libro</strong></a>
+                                    <button type="button" id="btn-show-ebook"
+                                        data-info="<?= $item->ebook_file ?>"
+                                        data-title="<?= $item->ebook_display ?>"
+                                        data-info-breve="<?= $item->ebook_year ?>"
+                                        class="align-self-end btn btn-lg btn-block btn-danger" style="margin-top: auto;"
+                                        data-bs-toggle="modal" data-bs-target="#modal_ebook"><strong>Ver libro</strong></>
                                 </div>
                             </div>
                         </div>
@@ -76,22 +92,45 @@
                 <!--Tampilkan pagination-->
                 <?php echo $pagination; ?>
             </div>
-
         </div>
-
     </div>
-
 </div>
-<!--<script>
-    $(function() {
-            $("#convocatorias-list").tabs();
-            $("#convocatorias-list").tabs("load", '#vigentes');
+<script src="<?= base_url('assets/plugins/pdfobject/jquery-3.7.1.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/pdfobject/pdfobject.min.js') ?>"></script>
+
+<script>
+    jQuery(document).ready(function($) {
+        $("#btn-show-ebook").click(function() {
+            let info = $(this).data('info');
+            let info_breve = $(this).data('info-breve');
+            let title = $(this).data('title');
+            $('.modal-title').html(title);
+            $('#info-breve').html(info_breve);
+            PDFObject.embed("<?= base_url('uploads/pdf/') ?>" + info, "#my-pdf");
+            //console.log(info);
         });
-    /*$(window).load(function() {
-        $('.nav-tabs a[href="#vigentes"]').tab('show');
-    });*/
-    /*$('#convocatorias-list a').on('click', function(e) {
-        e.preventDefault();
-        $(this).tab('show');
-    });*/
-</script>-->
+    });
+</script>
+
+<div class="modal fade" tabindex="-1" id="modal_ebook" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <!--<div class="modal-dialog">-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="info-breve">Libro disponible.</div>
+                <div id="my-pdf"></div>
+                <!-- <embed src="sample.pdf" frameborder="0" width="100%" height="400px"> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
