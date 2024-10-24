@@ -110,6 +110,17 @@
             //console.log(info);
         });
     });
+    $(function() {
+        // when the modal is closed
+        $('#modal_ebook').on('hidden.bs.modal', function() {
+            // remove the bs.modal data attribute from it
+            $(this).removeData('bs.modal');
+            // and empty the modal-content element
+            $('#modal_ebook .modal-title').empty();
+            $('#info-breve').empty();
+            $('#my-pdf').empty();
+        });
+    });
 </script>
 
 <div class="modal fade" tabindex="-1" id="modal_ebook" role="dialog" aria-hidden="true">
@@ -126,11 +137,9 @@
                 <!-- <embed src="sample.pdf" frameborder="0" width="100%" height="400px"> -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
         </div>
     </div>
 </div>
-
-
