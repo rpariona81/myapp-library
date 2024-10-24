@@ -76,12 +76,19 @@
                                             <span>&nbsp;<?= $item->catalog_name ?></span>
                                         </li>
                                     </ul>
-                                    <button type="button" id="btn-show-ebook"
+                                    <!-- <button type="button" id="btn-show-ebook"
                                         data-info="<?= $item->ebook_file ?>"
                                         data-title="<?= $item->ebook_display ?>"
                                         data-info-breve="<?= $item->ebook_year ?>"
                                         class="align-self-end btn btn-lg btn-block btn-danger" style="margin-top: auto;"
-                                        data-bs-toggle="modal" data-bs-target="#modal_ebook"><strong>Ver libro</strong></>
+                                        data-bs-toggle="modal" data-bs-target="#modal_ebook"><strong>Ver libro</strong>
+                                    </button> -->
+                                    <button type="button" id="btn-show-ebook"
+                                        onclick="verLibro('<?= $item->ebook_display ?>','<?= $item->ebook_file ?>')"
+                                        class="align-self-end btn btn-lg btn-block btn-danger" style="margin-top: auto;"
+                                        data-bs-toggle="modal" data-bs-target="#modal_ebook">
+                                        <strong>Ver libro</strong>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -99,6 +106,23 @@
 <script src="<?= base_url('assets/plugins/pdfobject/pdfobject.min.js') ?>"></script>
 
 <script>
+    function verLibro(info, label) {
+        console.log(info + '---' + label);
+        let titulo = info;
+        $('.modal-title').html(titulo);
+        if (!(label=='')) {
+            PDFObject.embed("<?= base_url('uploads/pdf/') ?>" + label, "#my-pdf");
+        }else{
+            $('#my-pdf').empty();
+            $('#my-pdf').removeClass();
+            $('#my-pdf').removeAttr();
+            $('#info-breve').html('Libro no disponible.');
+            $(this).removeData('bs.modal');
+        }
+    }
+</script>
+
+<!-- <script>
     jQuery(document).ready(function($) {
         $("#btn-show-ebook").click(function() {
             let info = $(this).data('info');
@@ -106,7 +130,7 @@
             let title = $(this).data('title');
             $('.modal-title').html(title);
             $('#info-breve').html(info_breve);
-            PDFObject.embed("<?= base_url('uploads/pdf/') ?>" + info, "#my-pdf");
+            PDFObject.embed("< ?  = base_url('uploads/pdf/') ?>" + info, "#my-pdf");
             //console.log(info);
         });
     });
@@ -121,7 +145,7 @@
             $('#my-pdf').empty();
         });
     });
-</script>
+</script> -->
 
 <div class="modal fade" tabindex="-1" id="modal_ebook" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
