@@ -25,18 +25,14 @@
                 </span>
                 <?= form_input(array('name' => 'search', 'value' => '', 'placeholder' => 'Buscar...', 'class' => 'form-control form-control-solid ps-10', 'id' => 'search_id', 'data-kt-search-element' => 'input')); ?>
             </div>
-            <!--begin:Action-->
             <div class="d-flex align-items-center">
                 <button type="submit" class="btn btn-primary me-5">Buscar</button>
             </div>
-            <!--end:Action-->
-
         </div>
 
     </div>
     <?= form_close() ?>
     <div class="border-top py-3 px-3 d-flex align-items-center">
-        <!--Tampilkan pagination-->
         <?php echo $pagination; ?>
     </div>
 </div>
@@ -65,7 +61,6 @@
                                     <div class="text-center px-4 mb-3">
                                         <img class="mw-100 mh-300px card-rounded-bottom" alt="portada" src="<?= $item->ebook_front_page ?? base_url('assets/media/books/portada_amarilla.png') ?>" />
                                     </div>
-                                    <!--<ul style="list-style: none; padding: 0; margin: 0;">-->
                                     <ul class="list-unstyled mt-0 mb-4">
                                         <li>
                                             <i class="fa fa-graduation-cap" style="height: 20px; width: 20px; text-align: center;"></i>
@@ -76,13 +71,6 @@
                                             <span>&nbsp;<?= $item->catalog_name ?></span>
                                         </li>
                                     </ul>
-                                    <!-- <button type="button" id="btn-show-ebook"
-                                        data-info="<?= $item->ebook_file ?>"
-                                        data-title="<?= $item->ebook_display ?>"
-                                        data-info-breve="<?= $item->ebook_year ?>"
-                                        class="align-self-end btn btn-lg btn-block btn-danger" style="margin-top: auto;"
-                                        data-bs-toggle="modal" data-bs-target="#modal_ebook"><strong>Ver libro</strong>
-                                    </button> -->
                                     <button type="button" id="btn-show-ebook"
                                         onclick="verLibro('<?= $item->ebook_display ?>','<?= $item->ebook_file ?>')"
                                         class="align-self-end btn btn-lg btn-block btn-danger" style="margin-top: auto;"
@@ -110,9 +98,9 @@
         console.log(info + '---' + label);
         let titulo = info;
         $('.modal-title').html(titulo);
-        if (!(label=='')) {
+        if (!(label == '')) {
             PDFObject.embed("<?= base_url('uploads/pdf/') ?>" + label, "#my-pdf");
-        }else{
+        } else {
             $('#my-pdf').empty();
             $('#my-pdf').removeClass();
             $('#my-pdf').removeAttr();

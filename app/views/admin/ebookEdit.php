@@ -12,7 +12,7 @@
             </div>
             <?= my_validation_errors(validation_errors()); ?>
             <div class="card-body">
-                <?= form_open('admincontroller/actualizaebook', array('enctype' => 'multipart/form-data')); ?>
+                <?= form_open('admincontroller/actualizaebook', array('enctype' => 'multipart/form-data', 'id' => 'updateEbook')); ?>
                 <input type="hidden" id="id" name="id" value="<?= $item->id ?>">
                 <div class="row pt-3">
                     <div class="col-md-8">
@@ -67,43 +67,68 @@
                     <div class="col-md-12">
                         <label for="ebook_details">Detalles</label>
                         <textarea class="form-control" id="ebook_details" name="ebook_details">
-                            <?= htmlspecialchars($item->ebook_details) ?>
+                            <?= trim($item->ebook_details) ?>
                         </textarea>
                     </div>
                 </div>
+                <br><br>
                 <div class="row pt-3">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label>Archivo</label>
-                            <div></div>
-                            <div class="custom-file">
-                                <input type="file" class='file form-control' id="ebook_file" name="ebook_file" data-browse-on-zone-click='true' />
-                            </div>
+                    <br /><br />
+                    <div class="col-md-4">
 
+                        <label>Archivo actual</label>
+                        <br>
+                        <strong>Descarga:</strong>
+                        <a class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="<?= $item->ebook_file ?>" target="_blank" download="<?= $item->ebook_file; ?>" href="<?= base_url('uploads/pdf/' . $item->ebook_file); ?>">
+                            <i class="fa fa-file-pdf"></i>
+                            <strong><?= $item->ebook_code ?></strong>
+                        </a>
+
+                    </div>
+                    <div class="col-md-2">
+                        <label>Actualizar archivo?</label>
+                        <br>
+                        <label class="form-check form-check-custom form-check-solid form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="checkFile" id="checkFile" value="1" />
+                            <span class="form-check-label fw-bold text-gray-700 fs-6">Reemplazar</span>
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nuevo archivo</label>
+                            <br>
+                            <div class="custom-file">
+                                <input type="file" class='file form-control' id="ebook_file" name="ebook_file" data-browse-on-zone-click='true' disabled />
+                            </div>
+                            <div id="alert-gral">
+                                <!--<div class="alert">-->
+                                <div id="alert-msg">
+                                    <div id="alert-title">
+                                        
+                                    </div>
+                                </div>
+                                <!--</div>-->
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-1"></div>
 
-                    <div class="col-md-3">
 
-                        <label>Archivo</label>
-                        <div></div>
-                        <strong>Descarga:</strong>
-                        <a class="btn btn-success btn-sm" data-bs-toggle="tooltip" data-bs-placement="left" title="Descargar" target="_blank" download="<?= $item->ebook_file; ?>" href="<?= base_url('uploads/pdf/' . $item->ebook_file); ?>">
-                            <i class="fa fa-file-pdf" title="<?= $item->ebook_file ?>"></i>
-                        </a>
-
-                    </div>
                 </div>
                 <div class="row pt-3">
                     <?php if ($this->session->flashdata('flashSuccess')) : ?>
                         <p class='alert alert-success'> <?= $this->session->flashdata('flashSuccess') ?> </p>
                     <?php endif ?>
+                    <?php if ($this->session->flashdata('flashError')) : ?>
+                        <p class='alert alert-danger'> <?= $this->session->flashdata('flashError') ?> </p>
+                    <?php endif ?>
                 </div>
                 <div class="row pt-3">
-                    <div class="col-md-3 mx-auto">
+                    <div class="col-md-6 mx-auto">
                         <div class="d-md-flex align-items-center">
-                            <input class="btn btn-primary" type="submit" value="Actualizar datos"></input>
+                            <input class="btn btn-primary" type="submit" value="Actualizar datos" onclick="tinyMCE.triggerSave(true,true);"></input>
+                            &nbsp;&nbsp;
+                            <a class="btn btn-success" href="<?= base_url('admin/catalogo') ?>" type="button" value="Volver al listado">Volver al listado</a>
                         </div>
                     </div>
                 </div>
@@ -112,3 +137,51 @@
         </div>
     </div>
 </div>
+
+<script src="<?= base_url('assets/plugins/pdfobject/jquery-3.7.1.min.js') ?>"></script>
+<script>
+    jQuery(document).ready(function() {
+        $('#checkFile').on('change', function() {
+            var selectCheck = $('input[name=checkFile]:checked', '#updateEbook').val();
+            //alert(selectCheck);
+            if (selectCheck !== null) {
+                $('#ebook_file').prop('disabled', false);
+                $('#ebook_file').prop('required', true);
+            }
+            if (selectCheck === undefined) {
+                $('#ebook_file').prop('disabled', true);
+                $('#ebook_file').prop('required', false);
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $('input[type="file"]').on('change', function() {
+        var ext = $(this).val().split('.').pop();
+        if ($(this).val() != '') {
+            //if (ext != "pdf")
+            //alert($(this).val()+'.....'+ext);
+            //$(this).val('');
+            if (ext == "pdf") {
+                //alert("La extensión es: " + ext);
+                if ($(this)[0].files[0].size > 67108864) {
+                    console.log("El documento excede el tamaño máximo");
+                    $('#alert-title').text('¡Precaución!');
+                    $('#alert-msg').html("Se solicita un archivo no mayor a 4MB. Por favor verifica.");
+                    $("#alert-gral").html();
+                    $(this).val('');
+                } else {
+                    console.log("El documento esta permitido");
+                    $('#alert-title').removeClass();
+                    $("#alert-gral").hide();
+                }
+            } else {
+                $(this).val('');
+                //alert("Extensión no permitida: " + ext);
+                $('#alert-title').addClass('text-danger');
+                $('#alert-title').text("Extensión no permitida: " + ext);
+            }
+        }
+    });
+</script>

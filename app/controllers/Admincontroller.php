@@ -1,4 +1,7 @@
 <?php
+
+use PHPUnit\TextUI\XmlConfiguration\Logging\Logging;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class AdminController extends CI_Controller
@@ -1111,51 +1114,71 @@ class AdminController extends CI_Controller
     public function actualizaEbook()
     {
         //$this->_validate();
-        //phpinfo();
-        date_default_timezone_set('America/Lima');
-        if ($this->session->userdata('user_rol') == 'admin') {
-            $id = $this->input->post('id');
-            $data = array(
-                'ebook_code' => $this->input->post('ebook_code') ? trim($this->input->post('ebook_code')) : NULL,
-                'ebook_isbn' => $this->input->post('ebook_isbn', true) ? trim($this->input->post('ebook_isbn', true)) : NULL,
-                'ebook_title' => $this->input->post('ebook_title', true) ? trim($this->input->post('ebook_title', true)) : NULL,
-                'ebook_details' => $this->input->post('ebook_details', true) ? htmlspecialchars(trim($this->input->post('ebook_details', true))) : NULL,
-                'ebook_display' => $this->input->post('ebook_display', true) ? trim($this->input->post('ebook_display', true)) : NULL,
-                'ebook_type' => $this->input->post('ebook_type', true),
-                'ebook_author' => $this->input->post('ebook_author', true),
-                'ebook_editorial' => $this->input->post('ebook_editorial', true),
-                'ebook_year' => $this->input->post('ebook_year', true),
-                'ebook_pages' => $this->input->post('ebook_pages', true) ? $this->input->post('ebook_pages', true) : 9999,
-                'ebook_front_page' => $this->input->post('ebook_front_page', true),
-                'catalog_id' => $this->input->post('catalog_id', true)
-            );
-            //var_dump($_FILES);
-            //exit();
-            //$this->_do_upload_ebook();
-            //exit();
-            if (!empty($_FILES)) {
-                $upload = $this->_do_upload_ebook();
-                if ($upload) {
-                    $data['ebook_url'] = $upload['upload_data']['full_path'];
-                    $data['ebook_file'] = $upload['upload_data']['file_name'];
+        try {
+            date_default_timezone_set('America/Lima');
+            if ($this->session->userdata('user_rol') == 'admin') {
+                $id = $this->input->post('id');
+                $checkFile = $this->input->post('checkFile');
+                $data = array(
+                    'ebook_code' => $this->input->post('ebook_code') ? trim($this->input->post('ebook_code')) : NULL,
+                    'ebook_isbn' => $this->input->post('ebook_isbn', true) ? trim($this->input->post('ebook_isbn', true)) : NULL,
+                    'ebook_title' => $this->input->post('ebook_title', true) ? trim($this->input->post('ebook_title', true)) : NULL,
+                    'ebook_details' => $this->input->post('ebook_details', true) ? htmlspecialchars(trim($this->input->post('ebook_details', true))) : NULL,
+                    'ebook_display' => $this->input->post('ebook_display', true) ? trim($this->input->post('ebook_display', true)) : NULL,
+                    'ebook_type' => $this->input->post('ebook_type', true),
+                    'ebook_author' => $this->input->post('ebook_author', true),
+                    'ebook_editorial' => $this->input->post('ebook_editorial', true),
+                    'ebook_year' => $this->input->post('ebook_year', true),
+                    'ebook_pages' => $this->input->post('ebook_pages', true) ? $this->input->post('ebook_pages', true) : 9999,
+                    'ebook_front_page' => $this->input->post('ebook_front_page', true),
+                    'catalog_id' => $this->input->post('catalog_id', true)
+                );
+                $checkFile = isset($checkFile) ?? 0;
+                //var_dump($checkFile);
+                //if (!empty($_FILES))  $checkFile=55;
+                //var_dump($checkFile);
+                //var_dump($_FILES);
+                //exit();
+                //$this->_do_upload_ebook();
+                //exit();
+                if ($checkFile) {
+                    if (!empty($_FILES)) {
+                        $upload = $this->_do_upload_ebook();
+                        if ($upload) {
+                            $data['ebook_url'] = $upload['upload_data']['full_path'];
+                            $data['ebook_file'] = $upload['upload_data']['file_name'];
+                            $model = BookEloquent::findOrFail($id);
+                            $model->fill($data);
+                            $model->save($data);
+                            $this->session->set_flashdata('flashSuccess', 'Actualización exitosa.');
+                            redirect_back();
+                        } else {
+                            $this->session->set_flashdata('flashError', 'Error de carga de archivo. Intente nuevamente.');
+                            //$this->viewConvocatoria($data['offer_id']);
+                            //redirect('users/convocatoria/' . $data['offer_id']);
+                            //redirect($_SERVER['REQUEST_URI'], 'refresh'); 
+                            redirect_back();
+                            exit();
+                            //return FALSE;
+                        }
+                    } else {
+                        $this->session->set_flashdata('flashError', 'Error de carga de archivo. Intente nuevamente.');
+                        exit();
+                    }
+                } else {
+                    //redirect($_SERVER['REQUEST_URI'], 'refresh'); 
                     $model = BookEloquent::findOrFail($id);
                     $model->fill($data);
                     $model->save($data);
-                    $this->session->set_flashdata('flashSuccess', 'Actualización exitosa.');
+                    $this->session->set_flashdata('flashSuccess', 'Actualización exitosa, no se modifica el PDF.');
                     redirect_back();
-                } else {
-                    $this->session->set_flashdata('flashError', 'Error de carga de archivo. Intente nuevamente.');
-                    //$this->viewConvocatoria($data['offer_id']);
-                    //redirect('users/convocatoria/' . $data['offer_id']);
-                    //redirect($_SERVER['REQUEST_URI'], 'refresh'); 
-                    exit();
-                    //return FALSE;
+                    //$this->session->set_flashdata('flashError', 'Error de carga de archivo.');
+                    //redirect_back(); 
                 }
-            } else {
-                //redirect($_SERVER['REQUEST_URI'], 'refresh'); 
-                $this->session->set_flashdata('flashError', 'Error de carga de archivo.');
-                redirect_back();
             }
+        } catch(Exception $e) {
+            $this->session->set_flashdata('flashError',$e->getMessage());
+            exit();
         }
     }
 }

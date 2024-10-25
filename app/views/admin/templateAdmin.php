@@ -24,6 +24,21 @@
     <link href="<?= base_url() ?>assets/css/vendor/buttons.bootstrap5.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>assets/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css" />
 
+    <!--<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>-->
+    <script src="<?= base_url('assets/plugins/tinymce/tinymce.min.js') ?>"></script>
+    <script>
+        /*tinymce.init({
+        selector: '#detail'
+      });*/
+        tinymce
+            .init({
+                selector: 'textarea#ebook_details',
+                plugins: "textcolor, lists code",
+                toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify \n\
+		              | bullist numlist outdent indent | forecolor backcolor table code"
+            });
+    </script>
+
 
 </head>
 <!--end::Head-->
@@ -580,13 +595,13 @@
 
     <!-- Datatables js -->
     <script src="<?= base_url() ?>assets/js/vendor/responsive.bootstrap5.min.js"></script>
-    
+
     <script src="<?= base_url() ?>assets/js/vendor/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/dataTables.bootstrap5.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/dataTables.responsive.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/dataTables.checkboxes.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/dataTables.keyTable.min.js"></script>
-    
+
     <script src="<?= base_url() ?>assets/js/vendor/dataTables.buttons.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/buttons.bootstrap5.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/buttons.html5.min.js"></script>
@@ -596,7 +611,7 @@
     <script src="<?= base_url() ?>assets/js/vendor/pdfmake.min.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/vfs_fonts.js"></script>
     <script src="<?= base_url() ?>assets/js/vendor/jszip.min.js"></script>
-    
+
 
 
     <script>
