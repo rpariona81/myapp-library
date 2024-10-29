@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -67,26 +67,18 @@ $route['logout'] = 'homecontroller/logout';
 
 /**AppController - Estudiantes - Docentes */
 $route['user'] = 'appcontroller/view_cards';
+
 $route['user/catalog'] = 'appcontroller/view_cards';
 $route['user/catalog/(:num)'] = 'appcontroller/view_cards/$1';
 
-$route['user/test'] = 'appcontroller/test';
-$route['user/convocatoria/(:num)'] = 'appcontroller/viewConvocatoria/$1';
-$route['user/postulaciones'] = 'appcontroller/viewPostulaciones';
 $route['user/perfil'] = 'appcontroller/viewPerfil';
 $route['user/credenciales'] = 'appcontroller/viewCredenciales';
-
-$route['user/descarga_cv'] = 'appcontroller/descargacv';
 
 $route['user/view/(:num)'] = 'appcontroller/viewpdf/$1';
 
 
-
+/**AdminController - Administrador */
 $route['admin'] = 'admincontroller/index';
-$route['admin/convocatorias'] = 'admincontroller/verConvocatorias';
-$route['admin/newconvocatoria'] = 'admincontroller/nuevaConvocatoria';
-$route['admin/convocatoria/(:num)'] = 'admincontroller/editaConvocatoria/$1';
-$route['admin/convocados/(:num)'] = 'admincontroller/verConvocados/$1';
 
 $route['admin/estudiantes'] = 'admincontroller/verEstudiantes';
 $route['admin/newestudiante'] = 'admincontroller/nuevoEstudiante';
@@ -104,12 +96,6 @@ $route['admin/reportes'] = 'admincontroller/verReportes';
 $route['admin/reportes/(:num)'] = 'admincontroller/verReportes/$1';
 $route['admin/reportes/(:num)'] = 'admincontroller/verReporte/$1';
 
-
-
-$route['admin/postulaciones'] = 'admincontroller/verPostulaciones';
-$route['admin/postulaciones/(:num)'] = 'admincontroller/verPostulaciones/$1';
-$route['admin/postulacion/(:num)'] = 'admincontroller/verPostulacion/$1';
-
 $route['admin/programas'] = 'admincontroller/verProgramas';
 $route['admin/newprograma'] = 'admincontroller/nuevoPrograma';
 $route['admin/programa/(:num)'] = 'admincontroller/editaPrograma/$1';
@@ -120,5 +106,3 @@ $route['admin/soporte'] = 'admincontroller/soporte';
 
 $route['admin/perfil'] = 'admincontroller/viewPerfil';
 $route['admin/claves'] = 'admincontroller/viewClave';
-
-$route['admin/vermodelocv'] = 'admincontroller/viewModeloCV';
