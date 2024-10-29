@@ -119,3 +119,18 @@ INSERT INTO t_ebooks(ebook_code,ebook_display) VALUES(2032,'2032');
 INSERT INTO t_ebooks(ebook_code,ebook_display) VALUES(2033,'2033');
 INSERT INTO t_ebooks(ebook_code,ebook_display) VALUES(2034,'2034');
 INSERT INTO t_ebooks(ebook_code,ebook_display) VALUES(2035,'2035');
+
+
+
+use laboratorio_ci;
+-- newapp.t_catalogs definition
+DROP TABLE `t_ebooks_views`;
+CREATE TABLE `t_ebooks_views` (
+  `ebook_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+)

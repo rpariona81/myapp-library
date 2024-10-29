@@ -401,7 +401,8 @@ class AppController extends CI_Controller
         redirect(base_url('/uploads/document/' . getenv('CV_NAME')), 'location', 301);
     }
 
-    public function viewpdf($id = NULL){
+    public function viewpdf($id = NULL)
+    {
         if ($this->session->userdata('user_rol') != NULL) {
             //$data['convocatoria'] = Offerjobeloquent::findOrFail($id);
             $data['model'] = UserEloquent::findOrFail($id);
@@ -413,8 +414,10 @@ class AppController extends CI_Controller
         } else {
             $this->session->set_flashdata('error', '');
             redirect('/login');
-        }        
+        }
     }
+
+    public function addViewEbook() {}
 }
 
 /* End of file Controllername.php */

@@ -164,7 +164,7 @@ class BookEloquent extends BaseModel
                     ->where('catalog_id', '=', $catalog)
                     ->get();
                 return $data;
-            }else{
+            } else {
                 $data = BookEloquent::leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
                     ->select(
                         't_ebooks.id',

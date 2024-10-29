@@ -34,7 +34,7 @@ class AdminController extends CI_Controller
             $data['content'] = 'admin/dashboard';
             $data['cantEstudEgres'] = UserEloquent::getCantEstudEgres();
             $data['cantCareers'] = CareerEloquent::getCantCareers();
-            $data['cantOffersjobs'] = OfferJobEloquent::getCantOffersjobs();
+            $data['cantBooks'] = BookEloquent::getCantEbooks();
             $data['cantPostulations'] = PostulateJobEloquent::getCantPostulations();
             $data['cantUsersByCareer'] = CareerEloquent::getCantUsersByCareer();
             $data['offersjobsLast'] = OfferJobEloquent::getOffersjobsLast();
@@ -1176,8 +1176,8 @@ class AdminController extends CI_Controller
                     //redirect_back(); 
                 }
             }
-        } catch(Exception $e) {
-            $this->session->set_flashdata('flashError',$e->getMessage());
+        } catch (Exception $e) {
+            $this->session->set_flashdata('flashError', $e->getMessage());
             exit();
         }
     }

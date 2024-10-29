@@ -5,10 +5,8 @@
 <head>
     <meta charset="utf-8" />
     <title><?= getenv('APP_NAME') ?></title>
-    <meta name="description"
-        content="Servicios al estudiante." />
-    <meta name="keywords"
-        content="bolsa laboral, Biblioteca virtual, Portales web" />
+    <meta name="description" content="Servicios al estudiante." />
+    <meta name="keywords" content="bolsa laboral, Biblioteca virtual, Portales web" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="<?= base_url() ?>assets/media/logos/favicon.ico" />
     <!--begin::Fonts-->
@@ -27,16 +25,16 @@
     <!--<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>-->
     <script src="<?= base_url('assets/plugins/tinymce/tinymce.min.js') ?>"></script>
     <script>
-        /*tinymce.init({
+    /*tinymce.init({
         selector: '#detail'
       });*/
-        tinymce
-            .init({
-                selector: 'textarea#ebook_details',
-                plugins: "textcolor, lists code",
-                toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify \n\
+    tinymce
+        .init({
+            selector: 'textarea#ebook_details',
+            plugins: "textcolor, lists code",
+            toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify \n\
 		              | bullist numlist outdent indent | forecolor backcolor table code"
-            });
+        });
     </script>
 
 
@@ -53,10 +51,10 @@
         <div class="page d-flex flex-row flex-column-fluid"></div>
 
         <!--begin::Aside-->
-        <div id="kt_aside" class="aside aside-dark aside-hoverable" data-kt-drawer="true"
-            data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}"
-            data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}"
-            data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
+        <div id="kt_aside" class="aside aside-dark aside-hoverable" data-kt-drawer="true" data-kt-drawer-name="aside"
+            data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
+            data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
+            data-kt-drawer-toggle="#kt_aside_mobile_toggle">
             <!--begin::Brand-->
             <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                 <!--begin::Logo-->
@@ -70,8 +68,8 @@
                     data-kt-toggle-name="aside-minimize">
                     <!--begin::Svg Icon | path: icons/duotone/Navigation/Angle-double-left.svg-->
                     <span class="svg-icon svg-icon-1 rotate-180">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                            height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <polygon points="0 0 24 0 24 24 0 24" />
                                 <path
@@ -256,11 +254,11 @@
                                             viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24" />
-                                                <rect fill="#000000" opacity="0.3" x="2" y="5" width="20"
-                                                    height="14" rx="2" />
+                                                <rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14"
+                                                    rx="2" />
                                                 <rect fill="#000000" x="2" y="8" width="20" height="3" />
-                                                <rect fill="#000000" opacity="0.3" x="16" y="14" width="4"
-                                                    height="2" rx="1" />
+                                                <rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2"
+                                                    rx="1" />
                                             </g>
                                         </svg>
                                     </span>
@@ -354,14 +352,14 @@
             <!--end::Aside menu-->
             <!--begin::Footer-->
             <div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
-                <a href="/logout" class="btn btn-custom btn-primary w-100"
-                    data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-delay-show="8000"
+                <a href="/logout" class="btn btn-custom btn-primary w-100" data-bs-toggle="tooltip"
+                    data-bs-trigger="hover" data-bs-delay-show="8000"
                     title="Check out the complete documentation with over 100 components">
                     <span class="btn-label">Cerrar sesión</span>
                     <!--begin::Svg Icon | path: icons/duotone/General/Clipboard.svg-->
                     <span class="svg-icon btn-icon svg-icon-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                            height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <rect x="0" y="0" width="24" height="24" />
                                 <path
@@ -420,9 +418,8 @@
                         <div class="d-flex align-items-stretch" id="kt_header_nav">
                             <!--begin::Menu wrapper-->
                             <div class="header-menu align-items-stretch" data-kt-drawer="true"
-                                data-kt-drawer-name="header-menu"
-                                data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
-                                data-kt-drawer-width="{default:'200px', '300px': '250px'}"
+                                data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}"
+                                data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}"
                                 data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle"
                                 data-kt-place="true" data-kt-place-mode="prepend"
                                 data-kt-place-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
@@ -430,8 +427,9 @@
                                 <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
                                     id="#kt_header_menu" data-kt-menu="true">
                                     <div class="menu-item me-lg-1">
-                                        <a class="menu-link py-3" href="/login">
-                                            <span class="menu-title">Inicio...<?= $this->session->userdata('user_login') ?></span>
+                                        <a class="menu-link py-3"
+                                            href="<?= base_url($this->session->userdata('user_rol')) ?>">
+                                            <span class="menu-title">Inicio</span>
                                         </a>
                                     </div>
 
@@ -465,16 +463,18 @@
                                             <div class="menu-content d-flex align-items-center px-3">
                                                 <!--begin::Avatar-->
                                                 <div class="symbol symbol-50px me-5">
-                                                    <img alt="Logo" src="<?= base_url() ?>assets/media/avatars/150-2.jpg" />
+                                                    <img alt="Logo"
+                                                        src="<?= base_url() ?>assets/media/avatars/150-2.jpg" />
                                                 </div>
                                                 <!--end::Avatar-->
                                                 <!--begin::Username-->
                                                 <div class="d-flex flex-column">
-                                                    <div class="fw-bolder d-flex align-items-center fs-5"><?= $this->session->userdata('user_name') ?>
+                                                    <div class="fw-bolder d-flex align-items-center fs-5">
+                                                        <?= $this->session->userdata('user_name') ?>
 
                                                     </div>
-                                                    <a href="#"
-                                                        class="fw-bold text-muted text-hover-primary fs-6">Mi perfil</a>
+                                                    <a href="#" class="fw-bold text-muted text-hover-primary fs-6">Mi
+                                                        perfil</a>
                                                 </div>
                                                 <!--end::Username-->
                                             </div>
@@ -487,8 +487,7 @@
 
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
-                                            <a href="/logout"
-                                                class="menu-link px-5 fs-6">Cerrar sesión</a>
+                                            <a href="/logout" class="menu-link px-5 fs-6">Cerrar sesión</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -527,8 +526,7 @@
             <!--begin::Footer-->
             <div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
                 <!--begin::Container-->
-                <div
-                    class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
+                <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
                     <!--begin::Copyright-->
                     <div class="text-dark order-2 order-md-1">
                         <span class="text-muted fw-bold me-1">2021©</span>
@@ -541,12 +539,10 @@
                             <a href="https://keenthemes.com/faqs" target="_blank" class="menu-link px-2">About</a>
                         </li>
                         <li class="menu-item">
-                            <a href="https://keenthemes.com/support" target="_blank"
-                                class="menu-link px-2">Support</a>
+                            <a href="https://keenthemes.com/support" target="_blank" class="menu-link px-2">Support</a>
                         </li>
                         <li class="menu-item">
-                            <a href="https://1.envato.market/EA4JP" target="_blank"
-                                class="menu-link px-2">Purchase</a>
+                            <a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
                         </li>
                     </ul>
                     <!--end::Menu-->
@@ -615,59 +611,59 @@
 
 
     <script>
-        //document.addEventListener("DOMContentLoaded", function() {
-        // Datatables Responsive
-        // https://datatables.net/reference/button/excelHtml5
+    //document.addEventListener("DOMContentLoaded", function() {
+    // Datatables Responsive
+    // https://datatables.net/reference/button/excelHtml5
 
-        //https://www.youtube.com/watch?v=j59H9xnyCBs
-        $(document).ready(function() {
-            /**https://datatables.net/forums/discussion/43723/how-can-i-remove-default-button-class-of-datatable-btn-default */
-            $.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-md btn-primary border-0';
-            var mytable = $("#datatable").DataTable({
-                deferRender: true,
-                responsive: true,
-                pageLength: 5,
-                lengthMenu: [5, 10, 25, 50],
-                //scrollH: true,
-                //scrollX: true,
-                order: [],
-                //stateSave: true,
-                language: {
-                    url: '<?= base_url('assets/plugins/i18n/es-ES.json') ?>',
-                    paginate: {
-                        previous: "<<",
-                        next: ">>",
-                        first: "<",
-                        last: ">"
-                    },
-                }
-            });
-
-            new $.fn.dataTable.Buttons(mytable, {
-                buttons: [
-                    'copy',
-                    {
-                        extend: 'pdf',
-                        orientation: 'landscape'
-                    }, 'print',
-                    {
-                        extend: 'excel',
-                        text: 'Excel',
-                        customize: function(xlsx) {
-                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                            //Para ver los estilos de formato https://datatables.net/reference/button/excelHtml5
-                            $('row c[r^="A"]', sheet).attr('n', '7');
-                            $('row c[r^="B"]', sheet).attr('s', '57');
-                            //Para que la columna se muestre como texto https://datatables.net/forums/discussion/73814/export-to-excel-with-format-text-for-column-b-c-and-d
-                            $('row c[r^="C"]', sheet).attr('s', '50');
-                        }
-                    }
-                ]
-            });
-
-            mytable.buttons().container().appendTo($('tr th.heading', mytable.table().container()));
-
+    //https://www.youtube.com/watch?v=j59H9xnyCBs
+    $(document).ready(function() {
+        /**https://datatables.net/forums/discussion/43723/how-can-i-remove-default-button-class-of-datatable-btn-default */
+        $.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-md btn-primary border-0';
+        var mytable = $("#datatable").DataTable({
+            deferRender: true,
+            responsive: true,
+            pageLength: 5,
+            lengthMenu: [5, 10, 25, 50],
+            //scrollH: true,
+            //scrollX: true,
+            order: [],
+            //stateSave: true,
+            language: {
+                url: '<?= base_url('assets/plugins/i18n/es-ES.json') ?>',
+                paginate: {
+                    previous: "<<",
+                    next: ">>",
+                    first: "<",
+                    last: ">"
+                },
+            }
         });
+
+        new $.fn.dataTable.Buttons(mytable, {
+            buttons: [
+                'copy',
+                {
+                    extend: 'pdf',
+                    orientation: 'landscape'
+                }, 'print',
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    customize: function(xlsx) {
+                        var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                        //Para ver los estilos de formato https://datatables.net/reference/button/excelHtml5
+                        $('row c[r^="A"]', sheet).attr('n', '7');
+                        $('row c[r^="B"]', sheet).attr('s', '57');
+                        //Para que la columna se muestre como texto https://datatables.net/forums/discussion/73814/export-to-excel-with-format-text-for-column-b-c-and-d
+                        $('row c[r^="C"]', sheet).attr('s', '50');
+                    }
+                }
+            ]
+        });
+
+        mytable.buttons().container().appendTo($('tr th.heading', mytable.table().container()));
+
+    });
     </script>
 
 
