@@ -9,7 +9,7 @@
 
 <!--begin::Card-->
 <div class="card mb-7">
-    <?= form_open('appcontroller/view_cards', array('id' => 'FRM_DATOS', 'class' => 'form-horizontal card-toolbar', 'onsubmit' => 'window.location.reload()')); ?>
+    <?= form_open('', array('id' => 'FRM_DATOS', 'class' => 'form-horizontal card-toolbar', 'onsubmit' => 'window.location.reload()')); ?>
     <!--begin::Card body-->
     <div class="card-body">
         <!--begin::Compact form-->
