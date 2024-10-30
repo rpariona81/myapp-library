@@ -208,4 +208,99 @@ class BookEloquent extends BaseModel
         }
         return $lista;
     }
+
+    public static function searchBooksPaginate($skip = NULL, $take = NULL, $search = NULL)
+    {
+        try {
+            if (!is_null($search)) {
+                $data = BookEloquent::leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
+                    ->select(
+                        't_ebooks.id',
+                        't_ebooks.ebook_code',
+                        't_ebooks.ebook_isbn',
+                        't_ebooks.ebook_title',
+                        't_ebooks.ebook_alias',
+                        't_ebooks.ebook_display',
+                        't_ebooks.ebook_type',
+                        't_ebooks.ebook_author',
+                        't_ebooks.ebook_editorial',
+                        't_ebooks.status',
+                        't_ebooks.ebook_year',
+                        't_ebooks.ebook_pages',
+                        't_ebooks.ebook_front_page',
+                        't_ebooks.ebook_details',
+                        't_ebooks.ebook_url',
+                        't_ebooks.ebook_file',
+                        't_ebooks.created_at',
+                        't_catalogs.catalog_name',
+                        't_catalogs.catalog_display'
+                    )
+                    ->skip($skip)->take($take)
+                    ->where('t_ebooks.ebook_title', 'LIKE', '%'.$search.'%')
+                    ->orWhere('t_ebooks.ebook_display', 'LIKE', '%'.$search.'%')
+                    ->orWhere('t_ebooks.ebook_alias', 'LIKE', '%'.$search.'%')
+                    ->orWhere('t_ebooks.ebook_details', 'LIKE', '%'.$search.'%')
+                    ->orWhere('t_catalogs.catalog_name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('t_catalogs.catalog_display', 'LIKE', '%'.$search.'%')
+                    ->get();
+                return $data;
+            } else {
+                $data = BookEloquent::leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
+                    ->select(
+                        't_ebooks.id',
+                        't_ebooks.ebook_code',
+                        't_ebooks.ebook_isbn',
+                        't_ebooks.ebook_title',
+                        't_ebooks.ebook_alias',
+                        't_ebooks.ebook_display',
+                        't_ebooks.ebook_type',
+                        't_ebooks.ebook_author',
+                        't_ebooks.ebook_editorial',
+                        't_ebooks.status',
+                        't_ebooks.ebook_year',
+                        't_ebooks.ebook_pages',
+                        't_ebooks.ebook_front_page',
+                        't_ebooks.ebook_details',
+                        't_ebooks.ebook_url',
+                        't_ebooks.ebook_file',
+                        't_ebooks.created_at',
+                        't_catalogs.catalog_name',
+                        't_catalogs.catalog_display'
+                    )
+                    ->skip($skip)->take($take)
+                    ->get();
+
+                return $data;
+            }
+        } catch (\Throwable $th) {
+            return;
+        }
+    }
+
+    public static function getCantSearchEbooks($search = NULL)
+    {
+        try {
+            if (!is_null($search)) {
+                $total = BookEloquent::leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
+                    ->where('t_ebooks.status', '=', '1')
+                    ->where('t_ebooks.ebook_display', 'LIKE', '%'.$search.'%')
+                    ->orWhere('t_catalogs.catalog_display', 'LIKE', '%'.$search.'%')
+                    /*->orWhere('t_ebooks.ebook_display', 'LIKE', '%$search%')
+                    /*->orWhere('t_ebooks.ebook_alias', 'LIKE', '%$search%')
+                    ->orWhere('t_ebooks.ebook_details', 'LIKE', '%$search%')
+                    ->orWhere('t_catalogs.catalog_name', 'LIKE', '%$search%')
+                    ->orWhere('t_catalogs.catalog_display', 'LIKE', '%$search%')*/
+                    ->count();
+                return $total;
+            } else {
+                $total = BookEloquent::leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
+                    ->where('t_ebooks.status', '=', '1')
+                    ->count();
+
+                return $total;
+            }
+        } catch (\Throwable $th) {
+            return;
+        }
+    }
 }

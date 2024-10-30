@@ -9,7 +9,7 @@
 
 <!--begin::Card-->
 <div class="card mb-7">
-    <?= form_open('', array('id' => 'FRM_DATOS', 'class' => 'form-horizontal card-toolbar', 'onsubmit' => 'window.location.reload()')); ?>
+    <?= form_open('appcontroller/view_cards', array('id' => 'FRM_DATOS', 'class' => 'form-horizontal card-toolbar', 'onsubmit' => 'window.location.reload()')); ?>
     <!--begin::Card body-->
     <div class="card-body">
         <!--begin::Compact form-->
@@ -23,7 +23,7 @@
                         <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
                     </svg>
                 </span>
-                <?= form_input(array('name' => 'search', 'value' => '', 'placeholder' => 'Buscar...', 'class' => 'form-control form-control-solid ps-10', 'id' => 'search_id', 'data-kt-search-element' => 'input')); ?>
+                <?= form_input(array('name' => 'search', 'value' => '', 'placeholder' => 'Buscar...', 'class' => 'form-control form-control-solid ps-10', 'id' => 'search', 'data-kt-search-element' => 'input')); ?>
             </div>
             <div class="d-flex align-items-center">
                 <button type="submit" class="btn btn-primary me-5">Buscar</button>

@@ -66,10 +66,14 @@ $route['logon'] = 'authcontroller/login';
 $route['logout'] = 'homecontroller/logout';
 
 /**AppController - Estudiantes - Docentes */
-$route['user'] = 'appcontroller/view_cards';
+//$route['user'] = 'appcontroller/view_cards';
+$route['user'] = 'appcontroller/searchBookCards';
 
 $route['user/catalog'] = 'appcontroller/view_cards';
 $route['user/catalog/(:num)'] = 'appcontroller/view_cards/$1';
+
+$route['user/ebooks'] = 'appcontroller/searchBookCards';
+$route['user/ebooks/(:num)'] = 'appcontroller/searchBookCards/$1';
 
 $route['user/perfil'] = 'appcontroller/viewPerfil';
 $route['user/credenciales'] = 'appcontroller/viewCredenciales';

@@ -51,7 +51,7 @@ class AppController extends CI_Controller
         }
     }
 
-    public function view_cards($search = NULL)
+    public function searchBookCards($search = NULL)
     {
         $data = array();
         $config['base_url'] = base_url() . '/user/catalog/';
@@ -116,20 +116,72 @@ class AppController extends CI_Controller
         $this->load->view('app/templateApp', $data);
     }
 
-    public function viewConvocatoria($id = NULL)
+    public function view_cards()
     {
         if ($this->session->userdata('user_rol') != NULL) {
-            //$data['convocatoria'] = Offerjobeloquent::findOrFail($id);
-            $data['checkPostulation'] = PostulateJobEloquent::checkPostulationUser($this->session->userdata('user_id'), $id);
-            $data['convocatoria'] = Offerjobeloquent::selectOffersjob($id);
-            $data['content'] = 'app/viewConvocatoria';
-            //echo json_encode($data);
-            $this->load->view('app/templateApp', $data);
+            $search_text = is_string($this->input->post('search', true)) ? strip_tags(trim(strip_tags($this->input->post('search', true)))) : '';
+            $total_row = BookEloquent::getCantSearchEbooks($search_text); //total row
+            //print_r($total_row);
+            $data = array();
+            if ($total_row > 0) {
+                $data['resultFlag'] = TRUE;
+                $config['base_url'] = base_url() . '/user/ebooks/';
+                $data['total_row'] = BookEloquent::getCantSearchEbooks($search_text); //total row
+                $config['total_rows'] = $total_row;
+                $data['pagina_title'] = $this->uri->segment(2);
+                $config['per_page'] = 9;  //show record per halaman
+                $config['uri_segment'] = 3;
+                $config['use_page_numbers'] = TRUE;
+                $config['page_query_string'] = FALSE;
+                $config['enable_query_strings'] = FALSE;
+
+                $choice = $config['total_rows'] / $config['per_page'];
+                //$config["num_links"] = floor($choice);
+                $config['num_links'] = (fmod(floor($choice), 9) > 9) ? fmod(floor($choice), 9) : 9;
+
+                // Membuat Style pagination untuk BootStrap v4
+                $config['first_link']       = '<li class="page-item"><span class="page-link">Primero</span></li>';
+                $config['last_link']        = '<li class="page-item"><span class="page-link">Último</span></li>';
+                $config['next_link']        = 'Siguiente';
+                $config['prev_link']        = 'Anterior';
+                $config['full_tag_open']    = '<nav aria-label="..." class="ms-auto"><ul class="pagination pagination-light mb-0">';
+                $config['full_tag_close']   = '</ul></nav>';
+                $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+                $config['num_tag_close']    = '</span></li>';
+                $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link" aria-current="page">';
+                $config['cur_tag_close']    = '</span></li>';
+                $config['next_tag_open']    = '<li class="page-item"><span class="page-link" aria-hidden="true">';
+                $config['next_tag_close']  = '</span></li>';
+                $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+                $config['prev_tag_close']  = '</span></li>';
+                $config['first_tag_open']   = '<li class="page-item"><span class="page-link border-0 font-weight-bold" href="javascript:;">';
+                $config['first_tag_close'] = '</span></li>';
+
+                $this->pagination->initialize($config);
+                $data['page'] = ($this->uri->segment(3)) ? ($this->uri->segment(3) - 1) * $config['per_page'] : 1;
+
+                $str_links = $this->pagination->create_links();
+                $data['links'] = explode('&nbsp;', $str_links);
+                //$results = $this->db->get('t_users', $config['per_page'], $this->uri->segment(4))->result_array();
+                //$results = User_Eloquent::skip($this->uri->segment(4))->take($config['per_page'])->get();
+                //$this->data['records'] = User_Eloquent::skip($this->data['page'])->take($config['per_page'])->get();
+                //$data['records'] = BookEloquent::getEbooksPaginate($data['page'], $config['per_page']);
+                $data['records'] = BookEloquent::searchBooksPaginate($data['page'], $config['per_page'], $search_text);
+
+                $data['pagination'] = $this->pagination->create_links();
+                $data['content'] = 'app/listCatalogosCardsPage';
+                $this->load->view('app/templateApp', $data);
+            } else {
+                $data['resultFlag'] = FALSE;
+                $data['resultVacio'] = 'No se encontraron libros en su búsqueda, intente con otra expresión.';
+                print_r($data);
+            }
         } else {
-            $this->session->set_flashdata('error', '');
-            redirect('/login');
+            $this->session->set_flashdata('error');
+            redirect('/');
         }
     }
+
 
     public function viewPerfil()
     {
@@ -145,18 +197,6 @@ class AppController extends CI_Controller
         }
     }
 
-    public function viewPostulaciones()
-    {
-        if ($this->session->userdata('user_rol') != NULL) {
-            $data['query'] = Postulatejobeloquent::getPostulations($this->session->userdata('user_id'));
-            $data['content'] = 'app/listPostulaciones';
-            //echo json_encode($data['query']);
-            $this->load->view('app/templateApp', $data);
-        } else {
-            $this->session->set_flashdata('error', '');
-            redirect('/login');
-        }
-    }
 
     public function no_repetir_email($registro)
     {
@@ -217,137 +257,6 @@ class AppController extends CI_Controller
         }
     }
 
-    public function _do_upload()
-    {
-        $config['upload_path']          = FCPATH . 'uploads/filescv/';
-        $config['allowed_types']        = 'pdf';
-        $config['max_size']             = 4096;
-        $config['file_name']            = round(microtime(true) * 1000);
-        $config['remove_spaces']        = TRUE;
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload('filecv')) {
-            //$error = array('error' => $this->upload->display_errors());
-            //print_r($error); die();
-            $data['error_string'] = 'Error de carga de archivo: ' . $this->upload->display_errors('', '');
-            $data['status'] = 0;
-            //echo json_encode($data);
-            //$this->session->set_flashdata('flashError', 'Error de carga de archivo: ' . $this->upload->display_errors('', ''));
-            //redirect($_SERVER['REQUEST_URI'], 'refresh'); 
-            //exit();
-            //return $data;
-            //return redirect()->to($_SERVER['HTTP_REFERER'], 'refresh');
-
-        } else {
-            $data = array('upload_data' => $this->upload->data());
-            //print_r("Funciona!!");
-            //$route_filecv = $data['full_path'];
-            //print_r($data);
-            //return $data;
-            //$this->load->view('upload_success', $data);
-        }
-        return $data;
-    }
-
-    public function send($recipient, $subject, $message, $fileUpload)
-    {
-        /* Load PHPMailer library */
-        $this->load->library('phpmailer_lib');
-        //$status_sendemail = NULL;
-
-        /* PHPMailer object */
-        $mail = $this->phpmailer_lib->load();                          // Passing `true` enables exceptions
-        try {
-            //Server settings
-            $mail->CharSet = 'UTF-8';
-            //$mail->SMTPDebug = 0;                                 // 2=Enable verbose debug output
-            $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = getenv('MAIL_HOST');             // Specify main and backup SMTP servers
-            $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = getenv('MAIL_USERNAME');        // SMTP username
-            $mail->Password = getenv('MAIL_PASSWORD');          // SMTP password
-            $mail->SMTPSecure = getenv('MAIL_ENCRYPTION');     // Enable TLS 
-            $mail->Port = getenv('MAIL_PORT');            // TCP port to connect to
-
-            //reply to before setfrom: https://stackoverflow.com/questions/10396264/phpmailer-reply-using-only-reply-to-address
-            $mail->AddReplyTo($this->session->userdata('user_email'));
-            $mail->setFrom(getenv('MAIL_USERNAME'), getenv('APP_NAME'));
-
-            $mail->addAddress($recipient);     // Add a recipient
-            $mail->addCC($this->session->userdata('user_email'));   // copy to user
-            $mail->addCC(getenv('MAIL_EMPLEABILIDAD'));   // copy to empleabilidad
-
-            //Content
-            $mail->isHTML(true);               // Set email format to HTML
-            $mail->Subject = $subject;
-            $datosPostulante = "<strong>Datos de Postulante:</strong><br><p>Nombres:&nbsp;" . $this->session->userdata('user_name') . " " . $this->session->userdata('user_paterno') . "</p><p>Email:&nbsp;" . $this->session->userdata('user_email') . "</p><p>Programa de estudios:&nbsp;" . $this->session->userdata('user_carrera') . "</p>";
-            $mail->Body    = $datosPostulante . "<br><p>" . $message . "</p>";
-            $mail->AltBody = strip_tags($message);
-            $mail->addAttachment($fileUpload);
-            $mail->send();
-            //$status_sendemail = TRUE;
-            $this->session->set_flashdata('flashSuccess', 'Correo enviado correctamente.');
-        } catch (Exception $e) {
-            log_message('error', "MAIL ERROR: " . $mail->ErrorInfo);
-            //$status_sendemail = FALSE;
-            $this->session->set_flashdata('flashError', 'Error de envio de correo.');
-        }
-        //return $status_sendemail;
-    }
-    public function postular()
-    {
-        //print_r($_FILES);
-        //$this->_do_upload();
-        //$this->_validate();
-        date_default_timezone_set('America/Lima');
-        $subject = $this->input->post('offer_title', TRUE);
-        $recipient = $this->input->post('offer_email', TRUE);
-        $message = "<p>" . htmlentities($this->input->post('msg_postulant', TRUE)) . "</p>";
-        $data = array(
-            'user_id' => $this->session->userdata('user_id'),
-            'offer_id' => $this->input->post('offer_id', TRUE),
-            'msg_postulant' => $this->input->post('msg_postulant', TRUE),
-            'email_notification' => $this->session->userdata('user_email'),
-            'date_postulation' => date("Y-m-d H:i:s"),
-            'result' => 2
-        );
-        //echo json_encode($data);
-        //print_r($_FILES);
-        if (!empty($_FILES)) {
-            $upload = $this->_do_upload();
-            if ($upload) {
-                $data['route_filecv'] = $upload['upload_data']['full_path'];
-                $data['filecv'] = $upload['upload_data']['file_name'];
-                /* Load PHPMailer library */
-                $this->send($recipient, $subject, $message, 'uploads/filescv/' . $data['filecv']);
-                $model = new Postulatejobeloquent();
-                $model->fill($data);
-                $model->save($data);
-                $this->session->set_flashdata('flashSuccess', 'Postulación realizada correctamente.');
-                //return true;
-                redirect('/user/postulaciones');
-            } else {
-                $this->session->set_flashdata('flashError', 'Error de carga de archivo. Intente nuevamente.');
-                //$this->viewConvocatoria($data['offer_id']);
-                //redirect('users/convocatoria/' . $data['offer_id']);
-                //redirect($_SERVER['REQUEST_URI'], 'refresh'); 
-                exit();
-                //return FALSE;
-            }
-        } else {
-            //redirect($_SERVER['REQUEST_URI'], 'refresh'); 
-            $this->session->set_flashdata('flashError', 'Error de carga de archivo.');
-            redirect('/user/postulaciones');
-        }
-
-        /*$model = new Postulatejobeloquent();
-        $model->fill($data);
-        $model->save($data);
-        //$this->postulatejobeloquent->save($data);
-        //echo json_encode($data);
-        redirect('/user/postulaciones');*/
-    }
 
     public function viewCredenciales()
     {
@@ -394,11 +303,6 @@ class AppController extends CI_Controller
                 redirect('/login');
             }
         }
-    }
-
-    public function descargacv()
-    {
-        redirect(base_url('/uploads/document/' . getenv('CV_NAME')), 'location', 301);
     }
 
     public function viewpdf($id = NULL)

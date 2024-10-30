@@ -2,14 +2,14 @@
     <div class="card border shadow-xs mb-4">
         <div class="card-header border-bottom pb-0">
             <h4 class="card-title">Datos personales</h4>&nbsp;
-            <p class="mt-9 fs-5"><muted>Cualquier corrección o actualización deberá solicitarlo al administrador.</muted></p>
+            <p class="mt-9 fs-5"><muted>Cualquier corrección o actualización deberá solicitarlo al administrador del instituto.</muted></p>
         </div>
         <?= my_validation_errors(validation_errors()); ?>
         <div class="card-body">
             <?= form_open('appcontroller/actualizaPerfil', array('class' => 'needs-validation')); ?>
             <input type="hidden" id="id" name="id" value="<?= $this->session->userdata('user_id') ?>">
             <div class="row pt-3">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="mb-3">
                         <label for="name">Tipo de Documento de identidad</label>
                         <!--<select class="form-control" id="document_type" name="document_type" aria-label="Default select example" disabled>
@@ -22,13 +22,13 @@
                         <?=form_dropdown('result', $document_type, $perfil->document_type_label, 'class="form-select" id="result" disabled'); ?>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="mb-3">
                         <label for="name">Número de documento</label>
                         <input type="text" class="form-control" id="document_number" name="document_number" value="<?= $perfil->document_number ?>" disabled>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label for="career_id">Programa de estudios</label>
                         <!--<select class="form-control" id="career_id" name="career_id" aria-label="Default select example" disabled>
