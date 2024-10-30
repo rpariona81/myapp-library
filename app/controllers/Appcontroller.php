@@ -125,7 +125,7 @@ class AppController extends CI_Controller
             $data = array();
             if ($total_row > 0) {
                 $data['resultFlag'] = TRUE;
-                $config['base_url'] = base_url() . '/user/ebooks/';
+                $config['base_url'] = base_url() . '/user/catalog/';
                 $data['total_row'] = BookEloquent::getCantSearchEbooks($search_text); //total row
                 $config['total_rows'] = $total_row;
                 $data['pagina_title'] = $this->uri->segment(2);
