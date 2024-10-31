@@ -82,6 +82,8 @@ $route['user/credenciales'] = 'appcontroller/viewCredenciales';
 
 $route['user/view/(:num)'] = 'appcontroller/viewpdf/$1';
 
+$route['user/addview']['post'] = 'appcontroller/addViewEbook';
+
 
 /**AdminController - Administrador */
 $route['admin'] = 'admincontroller/index';

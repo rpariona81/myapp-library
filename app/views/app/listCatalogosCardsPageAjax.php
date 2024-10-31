@@ -72,7 +72,7 @@
             /*jQuery.post("<?= base_url('appcontroller/addViewEbook/') ?>", {
                 "book_id": book_id
             })*/
-            $.post("<?= base_url('appcontroller/addViewEbook/') ?>", {
+            $.post("<?= base_url('user/addview') ?>", {
                     book_id: book_id
                 },
                 function(data, status) {
