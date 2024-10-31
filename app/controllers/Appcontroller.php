@@ -97,7 +97,7 @@ class AppController extends CI_Controller
     
             echo $this->pagination->create_links();
         */
-        /*$data['pagination'] = $this->pagination->create_links();
+    /*$data['pagination'] = $this->pagination->create_links();
         $data['content'] = 'app/listCatalogosCardsPage';
         $this->load->view('app/templateApp', $data);
     } */
@@ -317,23 +317,27 @@ class AppController extends CI_Controller
         }
     }
 
-    public function addViewEbook() 
+    public function addViewEbook()
     {
-        if ($this->session->userdata('user_rol') != NULL) {
-            //$data['convocatoria'] = Offerjobeloquent::findOrFail($id);
-            $data = [];
-            $data['user_id'] = $this->session->userdata('user_id');
-            //$book_id = $this->input->post('book_id',true);
-            //$data['ebook_id'] = BookEloquent::findOrFail($book_id)->get('id');
-            $data['ebook_id'] = $this->input->post('book_id',true);
-            var_dump($data);
-            //exit();
-            $model = new ViewBookEloquent();
-            $model->fill($data);
-            $model->save($data);
+        if ($this->input->is_ajax_request()) {
+
+            if ($this->session->userdata('user_rol') != NULL) {
+                //$data['convocatoria'] = Offerjobeloquent::findOrFail($id);
+                $data = [];
+                $data['user_id'] = $this->session->userdata('user_id');
+                //$book_id = $this->input->post('book_id',true);
+                //$data['ebook_id'] = BookEloquent::findOrFail($book_id)->get('id');
+                $data['ebook_id'] = $this->input->post('book_id', true);
+                var_dump($data);
+                //exit();
+                $model = new ViewBookEloquent();
+                $model->fill($data);
+                $model->save($data);
+            } else {
+                $this->session->set_flashdata('error', '');
+                redirect('/login');
+            }
         } else {
-            $this->session->set_flashdata('error', '');
-            redirect('/login');
         }
     }
 }
