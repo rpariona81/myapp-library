@@ -70,9 +70,9 @@ $route['logout'] = 'homecontroller/logout';
 //$route['user'] = 'appcontroller/searchBookCards';
 $route['user'] = 'appcontroller/index';
 
-$route['user/catalog'] = 'appcontroller/view_cards';
+$route['user/catalog']['post'] = 'appcontroller/view_cards';
 //$route['user/catalog'] = 'appcontroller/view_cards';
-$route['user/catalog/(:num)'] = 'appcontroller/view_cards/$1';
+$route['user/catalog/(:num)']['post'] = 'appcontroller/view_cards/$1';
 
 $route['user/ebooks'] = 'appcontroller/searchBookCards';
 $route['user/ebooks/(:num)'] = 'appcontroller/searchBookCards/$1';
