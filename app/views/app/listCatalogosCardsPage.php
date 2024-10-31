@@ -10,6 +10,8 @@
 <!--begin::Card-->
 <div class="card mb-7">
     <?= form_open('', array('id' => 'FRM_DATOS', 'class' => 'form-horizontal card-toolbar', 'onsubmit' => 'window.location.reload()')); ?>
+    <!--< ?= form_open('', array('id' => 'FRM_DATOS', 'class' => 'form-horizontal card-toolbar', 'onsubmit' => "window.location.href = '/user/catalog'; return true;")) ?>-->
+    <!--http://localhost:4000/user/catalog-->
     <!--begin::Card body-->
     <div class="card-body">
         <!--begin::Compact form-->

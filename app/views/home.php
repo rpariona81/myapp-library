@@ -59,7 +59,7 @@ License: For each use you must have a valid license purchased only from above li
 					<!--<div class="w-lg-500px p-10">-->
 					<div class="w-lg-500px p-10 p-lg-15 mx-auto">
 						<div class="col-12 text-center">
-							<img alt="Logo" src="assets/media/logos/escudo.jpeg" class="h-60px h-lg-75px" />
+							<img alt="Logo" src="<?php echo  (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGO') ?>" class="h-60px h-lg-75px" />
 							<br>
 							
 						</div><!--begin::Menu separator-->
@@ -115,9 +115,9 @@ License: For each use you must have a valid license purchased only from above li
 						<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
 							<div></div>
 							<!--begin::Link-->
-							<a href="#" class="link-primary">
+							<!-- <a href="#" class="link-primary">
 								Olvidó su contraseña?
-							</a>
+							</a> -->
 							<!--end::Link-->
 						</div>
 						<div class="d-grid mb-10">
@@ -127,13 +127,13 @@ License: For each use you must have a valid license purchased only from above li
 						<?php echo form_close();
 						?>
 						<!--begin::Sign up-->
-						<div class="text-gray-500 text-center fw-semibold fs-6">
+						<!-- <div class="text-gray-500 text-center fw-semibold fs-6">
 							No tiene cuenta?
 
 							<a href="#" class="link-primary">
 								Regístrese
 							</a>
-						</div>
+						</div> -->
 						<!--end::Sign up-->
 					</div>
 					<!--end::Wrapper-->

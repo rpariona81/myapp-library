@@ -46,7 +46,7 @@ class ViewBookEloquent extends BaseModel
         }
     }
 
-    public static function addViewEbook($ebook = NULL)
+    /*public static function addViewEbook($ebook = NULL)
     {
         try {
             if (!is_null($ebook)) {
@@ -58,5 +58,5 @@ class ViewBookEloquent extends BaseModel
         } catch (\Throwable $th) {
             //throw $th;
         }
-    }
+    }*/
 }

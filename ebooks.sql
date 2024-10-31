@@ -132,5 +132,7 @@ CREATE TABLE `t_ebooks_views` (
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+      FOREIGN KEY (ebook_id) REFERENCES t_ebooks(id),
+    FOREIGN KEY (user_id) REFERENCES t_users(id)
 )
