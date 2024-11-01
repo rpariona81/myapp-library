@@ -88,7 +88,7 @@
             // alert(search_key);
             // console.log(search_key);
             var dataString = 'search_key=' + search_key;
-            var base_url = '<?php echo site_url('/user/catalog/') ?>';
+            var base_url = '<?php echo site_url('/user/catalog') ?>';
 
             if (page_url == false) {
                 var page_url = base_url;
