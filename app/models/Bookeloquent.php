@@ -236,7 +236,7 @@ class BookEloquent extends BaseModel
                         't_catalogs.catalog_display'
                     )
                     ->skip($skip)->take($take)
-                    ->where(['t_ebooks.ebook_title', 'LIKE', '%'.$search.'%'],['t_ebooks.status', '=', '1'])
+                    ->where([['t_ebooks.ebook_title', 'LIKE', '%'.$search.'%'],['t_ebooks.status', '=', '1']])
                     ->orWhere('t_ebooks.ebook_display', 'LIKE', '%'.$search.'%')
                     ->orWhere('t_ebooks.ebook_alias', 'LIKE', '%'.$search.'%')
                     ->orWhere('t_ebooks.ebook_details', 'LIKE', '%'.$search.'%')
