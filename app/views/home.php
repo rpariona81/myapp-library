@@ -1,15 +1,5 @@
 <!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: MetronicProduct Version: 8.2.7
-Purchase: https://1.envato.market/Vm7VRE
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
+
 <html lang="en">
 <!--begin::Head-->
 
@@ -31,20 +21,20 @@ License: For each use you must have a valid license purchased only from above li
 	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 	<!--end::Global Stylesheets Bundle-->
-<style>
-	h2 {
-  text-shadow: 2px 0 #555, -2px 0 #555, 0 2px #555, 0 -2px #555,
-               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-}
-</style>
-	
+	<style>
+		h2 {
+			text-shadow: 2px 0 #555, -2px 0 #555, 0 2px #555, 0 -2px #555,
+				1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+		}
+	</style>
+
 </head>
 <!--end::Head-->
 
 <!--begin::Body-->
 
 <body id="kt_body" class="app-blank bg-white">
-	
+
 	<!--begin::Root-->
 	<div class="d-flex flex-column flex-root" id="kt_app_root">
 
@@ -59,9 +49,8 @@ License: For each use you must have a valid license purchased only from above li
 					<!--<div class="w-lg-500px p-10">-->
 					<div class="w-lg-500px p-10 p-lg-15 mx-auto">
 						<div class="col-12 text-center">
-							<img alt="Logo" src="<?php echo  (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGO') ?>" class="h-60px h-lg-75px" />
-							<br>
-							
+							<img alt="Logo" src="<?php echo (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGIN') ?>" class="h-120px h-lg-150px" />
+
 						</div><!--begin::Menu separator-->
 						<div class="separator my-2"></div>
 						<!--end::Menu separator--><br>
@@ -141,16 +130,29 @@ License: For each use you must have a valid license purchased only from above li
 				<!--end::Form-->
 
 				<!--begin::Footer-->
-				<div class="w-lg-500px d-flex flex-stack px-10 mx-auto">
-					<div></div>
+				<!--<div class="w-lg-500px d-flex flex-stack px-10 mx-auto">
+					<div >
+					<img alt="LogoEmpresa" src="/assets/property/logoEmpresa.png" class="h-30px h-lg-45px" />
+					</div>
 
 					<!--begin::Links-->
-					<div class="d-flex fw-semibold text-primary fs-base gap-5">
+				<!--<div class="d-flex fw-semibold text-primary fs-base gap-5">
 						<a href="#" target="_blank">Términos y condiciones</a>
 
 						<a href="#" target="_blank">Contáctanos</a>
 					</div>
 					<!--end::Links-->
+				<!--</div>-->
+
+				<div class="d-flex flex-column-auto justify-content-between mt-15">
+					<div class="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">
+						<img alt="LogoEmpresa" src="/assets/property/logoEmpresa.png" class="h-48px h-lg-60px" />
+					</div>
+					<div class="d-flex fw-semibold text-primary fs-base gap-5">
+						<a href="#" target="_blank">Términos y condiciones</a>
+
+						<a href="#" target="_blank">Contáctanos</a>
+					</div>
 				</div>
 				<!--end::Footer-->
 			</div>
@@ -172,9 +174,9 @@ License: For each use you must have a valid license purchased only from above li
 					<!--end::Image-->
 
 					<!--begin::Title-->
-					<h2 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7 shadow" >
+					<h2 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7 shadow">
 						Bienvenido a nuestra<br>
-									Biblioteca Virtual Institucional
+						Biblioteca Virtual Institucional
 					</h2>
 					<!--end::Title-->
 

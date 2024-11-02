@@ -59,9 +59,10 @@ License: For each use you must have a valid license purchased only from above li
 					<!--<div class="w-lg-500px p-10">-->
 					<div class="w-lg-500px p-10 p-lg-15 mx-auto">
 						<div class="col-12 text-center">
-							<img alt="Logo" src="assets/media/logos/escudo.jpeg" class="h-60px h-lg-75px" />
-							<br>
+							<img alt="Logo" src="assets/media/logos/escudo.jpeg" class="h-120px h-lg-150px" />
 							
+							<br>
+							<h3>IES Investigación, Ciencia y Tecnología</h3>
 						</div><!--begin::Menu separator-->
 						<div class="separator my-2"></div>
 						<!--end::Menu separator--><br>

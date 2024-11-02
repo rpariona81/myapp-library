@@ -59,7 +59,8 @@
             <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                 <!--begin::Logo-->
                 <a href="index.html">
-                    <img alt="Logo" src="<?= base_url() ?>assets/media/logos/logo-1-dark.svg" class="h-15px logo" />
+                    <!--<img alt="Logo" src="<?= base_url() ?>assets/media/logos/logo-1-dark.svg" class="h-15px logo" />-->
+                    <img alt="Logo" src="<?php echo  (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGO') ?>" class="h-15px logo" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Aside toggler-->
@@ -408,7 +409,8 @@
                     <!--begin::Mobile logo-->
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
                         <a href="index.html" class="d-lg-none">
-                            <img alt="Logo" src="<?= base_url() ?>assets/media/logos/logo-3.svg" class="h-30px" />
+                            <!--<img alt="Logo" src="<?= base_url() ?>assets/media/logos/logo-3.svg" class="h-30px" />-->
+                            <img alt="Logo" src="<?php echo  (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGO') ?>" class="h-30px"/>
                         </a>
                     </div>
                     <!--end::Mobile logo-->
@@ -529,12 +531,14 @@
                 <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
                     <!--begin::Copyright-->
                     <div class="text-dark order-2 order-md-1">
-                        <span class="text-muted fw-bold me-1">2021©</span>
-                        <a href="" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a>
+                        <!-- <span class="text-muted fw-bold me-1">2021©</span>
+                        <a href="" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a> -->
+                        <img alt="LogoEmpresa" src="/assets/property/logoEmpresa.png" class="h-48px h-lg-60px" />
+					</div>
                     </div>
                     <!--end::Copyright-->
                     <!--begin::Menu-->
-                    <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
+                    <!-- <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
                         <li class="menu-item">
                             <a href="https://keenthemes.com/faqs" target="_blank" class="menu-link px-2">About</a>
                         </li>
@@ -544,7 +548,7 @@
                         <li class="menu-item">
                             <a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
                         </li>
-                    </ul>
+                    </ul> -->
                     <!--end::Menu-->
                 </div>
                 <!--end::Container-->
