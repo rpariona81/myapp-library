@@ -235,13 +235,19 @@ class BookEloquent extends BaseModel
                         't_catalogs.catalog_name',
                         't_catalogs.catalog_display'
                     )
-                    ->skip($skip)->take($take)
-                    ->where([['t_ebooks.ebook_title', 'LIKE', '%'.$search.'%'],['t_ebooks.status', '=', '1']])
+                    ->where([['t_ebooks.status', '=', '1'], ['t_ebooks.ebook_title', 'LIKE', '%' . trim($search) . '%']])
+                    ->orWhere([['t_ebooks.status', '=', '1'], ['t_ebooks.ebook_display', 'LIKE', '%' . trim($search) . '%']])
+                    ->orWhere([['t_ebooks.status', '=', '1'], ['t_ebooks.ebook_alias', 'LIKE', '%' . trim($search) . '%']])
+                    ->orWhere([['t_ebooks.status', '=', '1'], ['t_ebooks.ebook_details', 'LIKE', '%' . trim($search) . '%']])
+                    ->orWhere([['t_ebooks.status', '=', '1'], ['t_catalogs.catalog_name', 'LIKE', '%' . trim($search) . '%']])
+                    ->orWhere([['t_ebooks.status', '=', '1'], ['t_catalogs.catalog_display', 'LIKE', '%' . trim($search) . '%']])
+                    /*->where('t_ebooks.ebook_title', 'LIKE', '%'.$search.'%')
                     ->orWhere('t_ebooks.ebook_display', 'LIKE', '%'.$search.'%')
                     ->orWhere('t_ebooks.ebook_alias', 'LIKE', '%'.$search.'%')
                     ->orWhere('t_ebooks.ebook_details', 'LIKE', '%'.$search.'%')
                     ->orWhere('t_catalogs.catalog_name', 'LIKE', '%'.$search.'%')
-                    ->orWhere('t_catalogs.catalog_display', 'LIKE', '%'.$search.'%')
+                    ->orWhere('t_catalogs.catalog_display', 'LIKE', '%'.$search.'%')*/
+                    ->skip($skip)->take($take)
                     ->get();
                 return $data;
             } else {
@@ -267,8 +273,8 @@ class BookEloquent extends BaseModel
                         't_catalogs.catalog_name',
                         't_catalogs.catalog_display'
                     )
-                    ->skip($skip)->take($take)
                     ->where('t_ebooks.status', '=', '1')
+                    ->skip($skip)->take($take)
                     ->get();
 
                 return $data;
@@ -283,9 +289,12 @@ class BookEloquent extends BaseModel
         try {
             if (!is_null($search)) {
                 $total = BookEloquent::leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
-                    ->where('t_ebooks.status', '=', '1')
-                    ->where('t_ebooks.ebook_display', 'LIKE', '%'.$search.'%')
-                    ->orWhere('t_catalogs.catalog_display', 'LIKE', '%'.$search.'%')
+                    ->where([['t_ebooks.status', '=', '1'], ['t_ebooks.ebook_title', 'LIKE', '%' . trim($search) . '%']])
+                    ->orWhere([['t_ebooks.status', '=', '1'], ['t_ebooks.ebook_display', 'LIKE', '%' . trim($search) . '%']])
+                    ->orWhere([['t_ebooks.status', '=', '1'], ['t_ebooks.ebook_alias', 'LIKE', '%' . trim($search) . '%']])
+                    ->orWhere([['t_ebooks.status', '=', '1'], ['t_ebooks.ebook_details', 'LIKE', '%' . trim($search) . '%']])
+                    ->orWhere([['t_ebooks.status', '=', '1'], ['t_catalogs.catalog_name', 'LIKE', '%' . trim($search) . '%']])
+                    ->orWhere([['t_ebooks.status', '=', '1'], ['t_catalogs.catalog_display', 'LIKE', '%' . trim($search) . '%']])
                     /*->orWhere('t_ebooks.ebook_display', 'LIKE', '%$search%')
                     /*->orWhere('t_ebooks.ebook_alias', 'LIKE', '%$search%')
                     ->orWhere('t_ebooks.ebook_details', 'LIKE', '%$search%')
