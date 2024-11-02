@@ -146,7 +146,7 @@
 
 				<div class="d-flex flex-column-auto justify-content-between mt-15">
 					<div class="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">
-						<img alt="LogoEmpresa" src="/assets/property/logoEmpresa.png" class="h-48px h-lg-60px" />
+						<img alt="LogoEmpresa" src="/assets/property/logoEmpresa.png" class="h-20px h-lg-30px" />
 					</div>
 					<div class="d-flex fw-semibold text-primary fs-base gap-5">
 						<a href="#" target="_blank">Términos y condiciones</a>
