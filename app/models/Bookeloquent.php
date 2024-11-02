@@ -269,6 +269,7 @@ class BookEloquent extends BaseModel
                         't_catalogs.catalog_display'
                     )
                     ->skip($skip)->take($take)
+                    ->where('t_ebooks.status', '=', '1')
                     ->get();
 
                 return $data;
