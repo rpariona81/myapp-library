@@ -31,20 +31,20 @@ License: For each use you must have a valid license purchased only from above li
 	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 	<!--end::Global Stylesheets Bundle-->
-<style>
-	h2 {
-  text-shadow: 2px 0 #555, -2px 0 #555, 0 2px #555, 0 -2px #555,
-               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-}
-</style>
-	
+	<style>
+		h2 {
+			text-shadow: 2px 0 #555, -2px 0 #555, 0 2px #555, 0 -2px #555,
+				1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+		}
+	</style>
+
 </head>
 <!--end::Head-->
 
 <!--begin::Body-->
 
 <body id="kt_body" class="app-blank bg-white">
-	
+
 	<!--begin::Root-->
 	<div class="d-flex flex-column flex-root" id="kt_app_root">
 
@@ -59,10 +59,7 @@ License: For each use you must have a valid license purchased only from above li
 					<!--<div class="w-lg-500px p-10">-->
 					<div class="w-lg-500px p-10 p-lg-15 mx-auto">
 						<div class="col-12 text-center">
-							<img alt="Logo" src="assets/media/logos/escudo.jpeg" class="h-120px h-lg-150px" />
-							
-							<br>
-							<h3>IES Investigación, Ciencia y Tecnología</h3>
+							<img alt="Logo" src="<?php echo (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGIN') ?>" class="h-120px h-lg-150px" />
 						</div><!--begin::Menu separator-->
 						<div class="separator my-2"></div>
 						<!--end::Menu separator--><br>
@@ -173,9 +170,9 @@ License: For each use you must have a valid license purchased only from above li
 					<!--end::Image-->
 
 					<!--begin::Title-->
-					<h2 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7 shadow" >
+					<h2 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7 shadow">
 						Bienvenido a nuestra<br>
-									Biblioteca Virtual Institucional
+						Biblioteca Virtual Institucional
 					</h2>
 					<!--end::Title-->
 
