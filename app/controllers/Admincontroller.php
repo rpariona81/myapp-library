@@ -1181,5 +1181,17 @@ class AdminController extends CI_Controller
             exit();
         }
     }
+
+    public function verLibro($id = NULL)
+    {
+        if ($this->session->userdata('user_rol') == 'admin') {
+            $data['book'] = BookEloquent::selectEbook($id);
+            $data['content'] = 'admin/ebookView';
+            $this->load->view('admin/templateAdmin', $data);
+        } else {
+            $this->session->set_flashdata('error');
+            redirect('/login');
+        }
+    }
 }
 /* End of file Controllername.php */

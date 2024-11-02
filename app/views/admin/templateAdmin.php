@@ -56,11 +56,11 @@
             data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
             data-kt-drawer-toggle="#kt_aside_mobile_toggle">
             <!--begin::Brand-->
-            <div class="aside-logo flex-column-auto" id="kt_aside_logo">
+            <div class="aside-logo bg-secondary flex-column-auto" id="kt_aside_logo">
                 <!--begin::Logo-->
-                <a href="index.html">
-                    <!--<img alt="Logo" src="<?= base_url() ?>assets/media/logos/logo-1-dark.svg" class="h-15px logo" />-->
-                    <img alt="Logo" src="<?php echo  (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGO') ?>" class="h-15px logo" />
+                <a href="<?=base_url($this->session->userdata('user_rol'))?>">
+                    <!--<img alt="Logo" src="< ?= base_url() ?>assets/media/logos/logo-1-dark.svg" class="h-15px logo" />-->
+                    <img alt="Logo" src="<?php echo  (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGO') ?>" class="h-60px logo" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Aside toggler-->
@@ -509,7 +509,7 @@
             </div>
             <!--end::Header-->
             <!--begin::Content-->
-            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <div class="content d-flex flex-column flex-column-fluid mt-10" id="kt_content">
 
 
 
