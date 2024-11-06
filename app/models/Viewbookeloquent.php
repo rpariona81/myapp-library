@@ -46,17 +46,16 @@ class ViewBookEloquent extends BaseModel
         }
     }
 
-    /*public static function addViewEbook($ebook = NULL)
+    public static function lastViews()
     {
-        try {
-            if (!is_null($ebook)) {
-                $data = ViewBookEloquent::create([
-                    'ebook_id' => $ebook->id,
-                    'user_id' => $this->session->userdata('user_id')
-                ]);
-            }
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
-    }*/
+        return ViewBookEloquent::leftjoin('t_ebooks', 't_ebooks.id', '=', 't_ebooks_views.ebook_id')
+            ->leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
+            ->where('t_ebooks.status', '=', 1)
+            ->take(4)->orderBy('t_ebooks_views.created_at', 'desc')
+            ->get([
+                't_ebooks.*',
+                't_catalogs.catalog_name',
+                't_catalogs.catalog_display'
+            ]);
+    }
 }

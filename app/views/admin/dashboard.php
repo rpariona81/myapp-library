@@ -151,48 +151,35 @@
             <div class="card-body">
                 <?php
                 //print_r($offersjobsLast);
-                if ($cantOffersjobs === 0) {
-                    echo '<p>No hay convocatorias recientes</p>';
+                if (empty($booksLast)) {
+                    echo '<p>No hay libros recientemente vistos</p>';
                 } else {
                 }
                 ?>
                 <div class="container-fluid">
-                    <?php foreach ($offersjobsLast as $itemjob) : ?>
+                    <?php foreach ($booksLast as $book) : ?>
                     <div class="row ticket-card mt-0 pb-2 border-bottom pb-3 mb-3">
                         <div class="ticket-details col-md-10">
                             <p class="text-dark font-weight-semibold mr-2 mt-1 mb-0 "><i class="fa fa-graduation-cap"
                                     style="height: 20px; width: 20px; text-align: center;"></i>
-                                <span>&nbsp;<?= $itemjob->career_title ?></span>
+                                <span>&nbsp;<?= $book->catalog_display ?></span>
                             </p>
                             <p class="text-primary mr-1 mb-0"><i class="fa fa-book"
                                     style="height: 20px; width: 20px; text-align: center;"></i>&nbsp; [Cód.
-                                <?= str_pad($itemjob->id, 6, '0', STR_PAD_LEFT) ?>
-                                ]</span>&nbsp;<?= $itemjob->title . ' <br>' . substr(htmlspecialchars_decode($itemjob->detail), 0, 100)  ?>
+                                <?= str_pad($book->ebook_code, 6, '0', STR_PAD_LEFT) ?>
+                                ]</span>&nbsp;<?= $book->ebook_display . ' <br>' . substr(strip_tags(htmlspecialchars_decode($book->ebook_details), "<div><b><br>"), 0, 100)  ?>
                             </p>
                             <p class="text-primary mr-1 mb-0"><i class="fa fa-industry fa-fw"
-                                    style="height: 20px; width: 20px; text-align: center;"></i>&nbsp;
-                                <?= $itemjob->employer ?></p>
+                                    style="height: 20px; width: 20px; text-align: center;"></i>Páginas&nbsp;
+                                <?= $book->ebook_pages ?></p>
                             <p class="text-default mr-1 mb-0">
-                                <i class="fa fa-money" style="height: 20px; width: 20px; text-align: center;"></i>
-                                <span>&nbsp;S/&nbsp;<?= $itemjob->salary ?></span>
+                                <i class="fa fa-user" style="height: 20px; width: 20px; text-align: center;"></i>
+                                <span>Autores:&nbsp;<?= $book->ebook_author ?></span>
                             </p>
                             <p>
                                 <i class="fa fa-map-marker" style="height: 20px; width: 20px; text-align: center;"></i>
-                                <span>&nbsp;Ubicación:&nbsp;<?= $itemjob->ubicacion ?>
+                                <span>&nbsp;Editorial:&nbsp;<?= $book->ebook_editorial ?>
                             </p>
-                            <div class="row text-gray d-md-flex d-none">
-                                <div class="col-6 d-flex">
-                                    <small
-                                        class="mb-0 mr-2 text-muted text-muted"><?= $itemjob->vacancy_numbers ?>&nbsp;vacantes
-                                        - &nbsp;<?= $itemjob->type_offer ?></small>
-                                </div>
-                                <div class="col-6 d-flex">
-                                    <i class="fa fa-calendar"
-                                        style="height: 20px; width: 20px; text-align: center;"></i><small
-                                        class="Last-responded mr-2 mb-0 text-muted text-muted">Finaliza el
-                                        <?= date("d/m/Y", strtotime($itemjob->date_vigency)); ?></small>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <?php endforeach; ?>

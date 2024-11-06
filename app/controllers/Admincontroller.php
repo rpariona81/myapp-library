@@ -17,6 +17,7 @@ class AdminController extends CI_Controller
         $this->load->model('careereloquent');
         $this->load->model('admineloquent');
         $this->load->model('bookeloquent');
+        $this->load->model('viewbookeloquent');
         $this->form_validation->set_message('no_repetir_username', 'Existe otro registro con el mismo %s');
         $this->form_validation->set_message('no_repetir_email', 'Existe otro registro con el mismo %s');
         $this->form_validation->set_message('no_repetir_document', 'Existe otro registro con el mismo %s');
@@ -38,6 +39,7 @@ class AdminController extends CI_Controller
             $data['cantPostulations'] = PostulateJobEloquent::getCantPostulations();
             $data['cantUsersByCareer'] = CareerEloquent::getCantUsersByCareer();
             $data['offersjobsLast'] = OfferJobEloquent::getOffersjobsLast();
+            $data['booksLast'] = ViewBookEloquent::lastViews();
             $this->load->view('admin/templateAdmin', $data);
         } else {
             $this->session->set_flashdata('error');
@@ -1186,6 +1188,18 @@ class AdminController extends CI_Controller
     {
         if ($this->session->userdata('user_rol') == 'admin') {
             $data['book'] = BookEloquent::selectEbook($id);
+            $data['content'] = 'admin/ebookView';
+            $this->load->view('admin/templateAdmin', $data);
+        } else {
+            $this->session->set_flashdata('error');
+            redirect('/login');
+        }
+    }
+
+    public function ultimosLibrosVistos()
+    {
+        if ($this->session->userdata('user_rol') == 'admin') {
+            $data['books'] = ViewBookEloquent::lastViews();
             $data['content'] = 'admin/ebookView';
             $this->load->view('admin/templateAdmin', $data);
         } else {
