@@ -137,8 +137,8 @@
 <script>
 var url = "<?= base_url('uploads/pdf/' . $book->ebook_file) ?>";
 var options = {
-    fallbackLink: "<p>Puede descargar el libro desde <a href='" + url + "'>este enlace</a></p>"
-
+    fallbackLink: "<p>Este navegador no soporta PDFs en línea, puede descargar el libro desde <a href='" + url +
+        "'>este enlace</a></p>"
 };
 PDFObject.embed("<?= base_url('uploads/pdf/' . $book->ebook_file) ?>", "#book_view", options);
 </script>
