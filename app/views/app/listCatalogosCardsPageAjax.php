@@ -11,46 +11,47 @@
 <div class="card-body">
     <div class="row gy-5 g-xl-8">
         <?php if ($resultFlag) { ?>
-            <?php foreach ($records as $item) { ?>
-                <div class="col-md-6 col-xxl-4">
-                    <div class="card card-stretch card-bordered mb-5 shadow-sm">
-                        <div class="card-header border-0 py-5">
-                            <h2 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder fs-2">
-                                    <font color="blue"><?= $item->ebook_display ?></font>
-                                </span>
-                            </h2>
-                        </div>
-                        <div class="card-body d-flex flex-column text-sm">
-                            <div class="text-center px-4 mb-3">
-                                <img class="mw-100 mh-300px card-rounded-bottom" alt="portada" src="<?= $item->ebook_front_page ?? base_url('assets/media/books/portada_amarilla.png') ?>" />
-                            </div>
-                            <ul class="list-unstyled mt-0 mb-4">
-                                <li>
-                                    <i class="fa fa-graduation-cap" style="height: 20px; width: 20px; text-align: center;"></i>
-                                    <span>&nbsp;<?= $item->ebook_title . ' [Cód. ' . str_pad($item->ebook_code, 6, '0', STR_PAD_LEFT) . ']'; ?></span>
-                                </li>
-                                <li>
-                                    <i class="fa fa-users" style="height: 20px; width: 20px; text-align: center;"></i>
-                                    <span>&nbsp;<?= $item->catalog_name ?></span>
-                                </li>
-                            </ul>
-                            <!-- <input type="hidden" id="book_id" name="book_id" value="<?= $item->id ?>"> -->
-
-                            <button type="button" id="btn-show-ebook"
-                                onclick="verLibro('<?= $item->ebook_display ?>','<?= $item->ebook_file ?>','<?= $item->id ?>')"
-                                class="align-self-end btn btn-lg btn-block btn-danger" style="margin-top: auto;"
-                                data-bs-toggle="modal" data-bs-target="#modal_ebook">
-                                <strong>Ver libro</strong>
-                            </button>
-                        </div>
-                    </div>
+        <?php foreach ($records as $item) { ?>
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-stretch card-bordered mb-5 shadow-sm">
+                <div class="card-header border-0 py-5">
+                    <h2 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-2">
+                            <font color="blue"><?= $item->ebook_display ?></font>
+                        </span>
+                    </h2>
                 </div>
-            <?php } ?>
+                <div class="card-body d-flex flex-column text-sm">
+                    <div class="text-center px-4 mb-3">
+                        <img class="mw-100 mh-300px card-rounded-bottom" alt="portada"
+                            src="<?= $item->ebook_front_page ?? base_url('assets/media/books/portada_amarilla.png') ?>" />
+                    </div>
+                    <ul class="list-unstyled mt-0 mb-4">
+                        <li>
+                            <i class="fa fa-graduation-cap" style="height: 20px; width: 20px; text-align: center;"></i>
+                            <span>&nbsp;<?= $item->ebook_title . ' [Cód. ' . str_pad($item->ebook_code, 6, '0', STR_PAD_LEFT) . ']'; ?></span>
+                        </li>
+                        <li>
+                            <i class="fa fa-users" style="height: 20px; width: 20px; text-align: center;"></i>
+                            <span>&nbsp;<?= $item->catalog_name ?></span>
+                        </li>
+                    </ul>
+                    <!-- <input type="hidden" id="book_id" name="book_id" value="<?= $item->id ?>"> -->
+
+                    <button type="button" id="btn-show-ebook"
+                        onclick="verLibro('<?= $item->ebook_display ?>','<?= $item->ebook_file ?>','<?= $item->id ?>')"
+                        class="align-self-end btn btn-lg btn-block btn-danger" style="margin-top: auto;"
+                        data-bs-toggle="modal" data-bs-target="#modal_ebook">
+                        <strong>Ver libro</strong>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
         <?php } else { ?>
-            <h6 class="ml-5">
-                <font color="red"><em>No hay resultados para su búsqueda, por favor intente con otro valor.</em></font>
-            </h6>
+        <h6 class="ml-5">
+            <font color="red"><em>No hay resultados para su búsqueda, por favor intente con otro valor.</em></font>
+        </h6>
         <?php } ?>
     </div>
 </div>
@@ -63,51 +64,57 @@
 
 
 <script>
-    function verLibro(info, label, book_id) {
-        console.log(info + '---' + label + "--" + book_id);
-        let titulo = info;
-        $('.modal-title').html(titulo);
-        if (!(label == '')) {
-            PDFObject.embed("<?= base_url('uploads/pdf/') ?>" + label, "#my-pdf");
-            /*jQuery.post("<?= base_url('appcontroller/addViewEbook/') ?>", {
-                "book_id": book_id
-            })*/
-            $.post("<?= base_url('user/addview') ?>", {
-                    book_id: book_id
-                },
-                function(data, status) {
-                    console.log("Data: " + data + "\nStatus: " + status);
-                });
-        } else {
-            $('#my-pdf').empty();
-            $('#my-pdf').removeClass();
-            $('#my-pdf').removeAttr();
-            $('#info-breve').html('Libro no disponible.');
-            $(this).removeData('bs.modal');
-        }
+function verLibro(info, label, book_id) {
+    console.log(info + '---' + label + "--" + book_id);
+    let titulo = info;
+    $('.modal-title').html(titulo);
+    if (!(label == '')) {
+        var url = "<?= base_url('uploads/pdf/' . $book->ebook_file) ?>";
+        var options = {
+            fallbackLink: "<p>Este navegador no soporta PDFs en línea, puede descargar el libro desde <a href='" +
+                url + "'>este enlace</a></p>"
+        };
+
+        PDFObject.embed("<?= base_url('uploads/pdf/') ?>" + label, "#my-pdf", options);
+        /*jQuery.post("<?= base_url('appcontroller/addViewEbook/') ?>", {
+            "book_id": book_id
+        })*/
+        $.post("<?= base_url('user/addview') ?>", {
+                book_id: book_id
+            },
+            function(data, status) {
+                console.log("Data: " + data + "\nStatus: " + status);
+            });
+    } else {
+        $('#my-pdf').empty();
+        $('#my-pdf').removeClass();
+        $('#my-pdf').removeAttr();
+        $('#info-breve').html('Libro no disponible.');
+        $(this).removeData('bs.modal');
     }
+}
 </script>
 
 <script>
-    // $(document).ready(function() {
-    //     $("#btn-show-ebook").click(function() {
-    //         var book_id = $("input[name='book_id']").val();
-    //         console.log('val :' + book_id); // do something
-    //         $.ajax({
-    //             url: "< ?= base_url('appcontroller/addViewEbook/') ?>",
-    //             type: "POST",
-    //             dataType: 'json',
-    //             data: {book_id: book_id},
-    //             success: function(data) {
-    //                 console.log('funciona ' + book_id); // do something
-    //             },
-    //             error: function(data) {
-    //                 console.log(book_id + ' error');
-    //             }
-    //         });
-    //         $("input[name='book_id']").val('');
-    //     });
-    // });
+// $(document).ready(function() {
+//     $("#btn-show-ebook").click(function() {
+//         var book_id = $("input[name='book_id']").val();
+//         console.log('val :' + book_id); // do something
+//         $.ajax({
+//             url: "< ?= base_url('appcontroller/addViewEbook/') ?>",
+//             type: "POST",
+//             dataType: 'json',
+//             data: {book_id: book_id},
+//             success: function(data) {
+//                 console.log('funciona ' + book_id); // do something
+//             },
+//             error: function(data) {
+//                 console.log(book_id + ' error');
+//             }
+//         });
+//         $("input[name='book_id']").val('');
+//     });
+// });
 </script>
 
 
