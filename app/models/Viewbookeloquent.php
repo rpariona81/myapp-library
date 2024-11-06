@@ -50,6 +50,7 @@ class ViewBookEloquent extends BaseModel
     {
         return ViewBookEloquent::leftjoin('t_ebooks', 't_ebooks.id', '=', 't_ebooks_views.ebook_id')
             ->leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
+            ->distinct('t_ebooks.id')
             ->where('t_ebooks.status', '=', 1)
             ->take(4)->orderBy('t_ebooks_views.created_at', 'desc')
             ->get([
