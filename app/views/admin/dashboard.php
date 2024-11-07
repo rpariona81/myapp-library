@@ -167,7 +167,7 @@
                         <div class="d-flex flex-column">
                             <h5 class="text-gray-800 fw-bolder">[Cód.
                                     <?= str_pad($book->ebook_code, 6, '0', STR_PAD_LEFT) ?>
-                                    ]</span>&nbsp;<?= $book->ebook_display . ' <br>' . substr(strip_tags(htmlspecialchars_decode($book->ebook_details), "<div><b><br>"), 0, 100)  ?></h5>
+                                    ]</span>&nbsp;<?= $book->ebook_display . ' <br>' ?> </h5>
                             <!--begin::Section-->
                             <div class="fw-bold">
                                 <!--begin::Desc-->
@@ -192,6 +192,11 @@
                             <div class="fw-bold">
                                 <!--begin::Desc-->
                                 <span class="text-dark">Año: &nbsp;<?= $book->ebook_year ?></span>
+                                <!--end::Desc-->
+                            </div>
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-dark">Año: &nbsp;<?= substr(strip_tags(htmlspecialchars_decode($book->ebook_details), "<div><b><br>"), 0, 100) ?></span>
                                 <!--end::Desc-->
                             </div>
                             <!--end::Section-->
