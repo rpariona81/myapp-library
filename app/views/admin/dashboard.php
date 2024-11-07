@@ -196,7 +196,7 @@
                             </div>
                             <div class="fw-bold">
                                 <!--begin::Desc-->
-                                <span class="text-dark">Año: &nbsp;<?= substr(strip_tags(htmlspecialchars_decode($book->ebook_details), "<div><b><br>"), 0, 100) ?></span>
+                                <span class="text-dark">Temas: &nbsp;<?= substr(strip_tags(htmlspecialchars_decode($book->ebook_details), "<div><b><br>"), 0, 100) ?></span>
                                 <!--end::Desc-->
                             </div>
                             <!--end::Section-->
