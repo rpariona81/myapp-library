@@ -1,6 +1,6 @@
 use laboratorio_ci;
 -- laboratorio_ci.t_catalogs definition
-DROP TABLE `t_catalogs`;
+DROP TABLE IF EXISTS `t_catalogs`;
 CREATE TABLE `t_catalogs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `catalog_name` varchar(255) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE `t_catalogs` (
 
 use laboratorio_ci;
 -- newapp.t_catalogs definition
-DROP TABLE `t_ebooks`;
+DROP TABLE IF EXISTS `t_ebooks`;
 CREATE TABLE `t_ebooks` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ebook_code` varchar(255) NOT NULL,
@@ -124,7 +124,7 @@ INSERT INTO t_ebooks(ebook_code,ebook_display) VALUES(2035,'2035');
 
 use laboratorio_ci;
 -- newapp.t_catalogs definition
-DROP TABLE `t_ebooks_views`;
+DROP TABLE IF EXISTS `t_ebooks_views`;
 CREATE TABLE `t_ebooks_views` (
   `ebook_id` bigint(20) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
@@ -136,3 +136,29 @@ CREATE TABLE `t_ebooks_views` (
       FOREIGN KEY (ebook_id) REFERENCES t_ebooks(id),
     FOREIGN KEY (user_id) REFERENCES t_users(id)
 )
+
+use laboratorio_ci;
+-- laboratorio_ci.t_catalogs definition
+DROP TABLE IF EXISTS `t_settings`;
+CREATE TABLE `t_settings` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `client_ruc_uid` varchar(25) NOT NULL,
+  `client_alias` varchar(255) DEFAULT NULL,
+  `client_display` varchar(255) DEFAULT NULL,
+  `client_type` varchar(255) DEFAULT NULL,
+  `client_logo` varchar(255) DEFAULT NULL,
+  `client_weburl` varchar(255) DEFAULT NULL,
+  `client_slogan` varchar(255) DEFAULT NULL,
+  `client_info` varchar(255) DEFAULT NULL,
+  `client_max_users` int(8) DEFAULT NULL,
+  `client_license` varchar(255) DEFAULT NULL,
+  `client_date_license` date DEFAULT NULL,
+  `client_address` varchar(255) DEFAULT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `u_ruc_uid` (`client_ruc_uid`),
+  UNIQUE KEY `u_display` (`client_display`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

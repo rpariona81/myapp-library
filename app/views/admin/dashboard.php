@@ -29,7 +29,7 @@
                                 </svg>&nbsp;<?= $cantEstudEgres ?>
                             </span>
                             <!--end::Svg Icon-->
-                            <a href="#" class="text-warning fw-bold fs-6">Usuarios activos</a>
+                            <a href="<?= base_url('admin') . '/estudiantes' ?>" class="text-warning fw-bold fs-6">Estudiantes activos</a>
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
@@ -47,7 +47,7 @@
                                 </svg>&nbsp;<?= $cantBooks ?>
                             </span>
                             <!--end::Svg Icon-->
-                            <a href="#" class="text-primary fw-bold fs-6">Libros disponibles</a>
+                            <a href="<?= base_url('admin') . '/catalogo' ?>" class="text-primary fw-bold fs-6">Libros disponibles</a>
                         </div>
                         <!--end::Col-->
                     </div>
@@ -69,7 +69,7 @@
                                 </svg>&nbsp;<?= $cantCareers ?>
                             </span>
                             <!--end::Svg Icon-->
-                            <a href="#" class="text-danger fw-bold fs-6 mt-2">Programas de estudios</a>
+                            <a href="<?= base_url('admin') . '/programas' ?>" class="text-danger fw-bold fs-6 mt-2">Programas de estudios</a>
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
@@ -87,7 +87,7 @@
                                 </svg>&nbsp;informes@tecnoicit
                             </span>
                             <!--end::Svg Icon-->
-                            <a href="#" class="text-success fw-bold fs-6 mt-2">Información del Instituto</a>
+                            <a href="<?= base_url('admin') . '/info' ?>" class="text-success fw-bold fs-6 mt-2">Información del Instituto</a>
                         </div>
                         <!--end::Col-->
                     </div>
@@ -110,31 +110,31 @@
             <!--<div class="card-body">-->
 
             <?php foreach ($cantUsersByCareer as $item) : ?>
-            <!-- <div class="wrapper container"> -->
-            <!--<div class="d-flex justify-content-between">
+                <!-- <div class="wrapper container"> -->
+                <!--<div class="d-flex justify-content-between">
                                 <h5 class="mb-2"><?= $item->career_title ?></h5>
                                 <p class="mb-2 text-primary display-6"><?= ($item->cant_Users) ? $item->cant_Users : 0 ?></p>
                             </div>
                             <div class="progress">
                                 <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="height:50px; width:<?= ($item->cant_Users / $cantEstudEgres) * 100 + 25 ?>%" aria-valuenow="<?= ($item->cant_Users / $cantEstudEgres) ?>" aria-valuemin="0" aria-valuemax="<?= $cantEstudEgres ?>"></div>
                             </div>-->
-            <!--</div>--><br>
-            <ul class="list-group list-group-flush">
+                <!--</div>--><br>
+                <ul class="list-group list-group-flush">
 
-                <li class="list-group-item px-4 pb-4">
-                    <p class="mb-2 font-weight-bold"><strong class="text-primary"><?= $item->career_title ?></strong>
-                        <strong
-                            class="float-end text-secondary"><?= ($item->cant_Users) ? $item->cant_Users : 0 ?></strong>
-                    </p>
-                    <div class="progress progress-sm">
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                            role="progressbar"
-                            style="height:50px; width:<?= ($item->cant_Users / $cantEstudEgres) * 100 + 25 ?>%"
-                            aria-valuenow="<?= ($item->cant_Users / $cantEstudEgres) ?>" aria-valuemin="0"
-                            aria-valuemax="<?= $cantEstudEgres ?>"></div>
-                    </div>
-                </li>
-            </ul>
+                    <li class="list-group-item px-4 pb-4">
+                        <p class="mb-2 font-weight-bold"><strong class="text-primary"><?= $item->career_title ?></strong>
+                            <strong
+                                class="float-end text-secondary"><?= ($item->cant_Users) ? $item->cant_Users : 0 ?></strong>
+                        </p>
+                        <div class="progress progress-sm">
+                            <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+                                role="progressbar"
+                                style="height:50px; width:<?= ($item->cant_Users / $cantEstudEgres) * 100 + 25 ?>%"
+                                aria-valuenow="<?= ($item->cant_Users / $cantEstudEgres) ?>" aria-valuemin="0"
+                                aria-valuemax="<?= $cantEstudEgres ?>"></div>
+                        </div>
+                    </li>
+                </ul>
 
             <?php endforeach; ?>
             <!--</div>-->
@@ -158,31 +158,50 @@
                 ?>
                 <div class="container-fluid">
                     <?php foreach ($booksLast as $book) : ?>
-                    <div class="row ticket-card mt-0 pb-2 border-bottom pb-3 mb-3">
-                        <div class="ticket-details col-md-10">
-                            <p class="text-dark font-weight-semibold mr-2 mt-1 mb-0 "><i class="fa fa-graduation-cap"
-                                    style="height: 20px; width: 20px; text-align: center;"></i>
-                                <span>&nbsp;<?= $book->catalog_display ?></span>
-                            </p>
-                            <p class="text-primary mr-1 mb-0"><i class="fa fa-book"
-                                    style="height: 20px; width: 20px; text-align: center;"></i>&nbsp; [Cód.
-                                <?= str_pad($book->ebook_code, 6, '0', STR_PAD_LEFT) ?>
-                                ]</span>&nbsp;<?= $book->ebook_display . ' <br>' . substr(strip_tags(htmlspecialchars_decode($book->ebook_details), "<div><b><br>"), 0, 100)  ?>
-                            </p>
-                            <p class="text-primary mr-1 mb-0"><i class="fa fa-industry fa-fw"
-                                    style="height: 20px; width: 20px; text-align: center;"></i>Páginas&nbsp;
-                                <?= $book->ebook_pages ?></p>
-                            <p class="text-default mr-1 mb-0">
-                                <i class="fa fa-user" style="height: 20px; width: 20px; text-align: center;"></i>
-                                <span>Autores:&nbsp;<?= $book->ebook_author ?></span>
-                            </p>
-                            <p>
-                                <i class="fa fa-map-marker" style="height: 20px; width: 20px; text-align: center;"></i>
-                                <span>&nbsp;Editorial:&nbsp;<?= $book->ebook_editorial ?>
-                            </p>
+                        <!--begin::Item-->
+                    <div class="d-flex align-items-center mb-10 border-bottom pb-3 mb-3">
+                        <!--begin::Icon-->
+                        <i class="fas fa-book-open text-primary fs-1 me-5"></i>
+                        <!--end::SymIconbol-->
+                        <!--begin::Info-->
+                        <div class="d-flex flex-column">
+                            <h5 class="text-gray-800 fw-bolder">[Cód.
+                                    <?= str_pad($book->ebook_code, 6, '0', STR_PAD_LEFT) ?>
+                                    ]</span>&nbsp;<?= $book->ebook_display . ' <br>' . substr(strip_tags(htmlspecialchars_decode($book->ebook_details), "<div><b><br>"), 0, 100)  ?></h5>
+                            <!--begin::Section-->
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-muted"><?= $book->catalog_display ?></span>
+                                <!--end::Desc-->
+                            </div>
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-dark"><?= $book->ebook_pages ?>&nbsp;páginas</span>
+                                <!--end::Desc-->
+                            </div>
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-dark">Editorial: &nbsp;<?= $book->ebook_editorial ?></span>
+                                <!--end::Desc-->
+                            </div>
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-dark">Autores: &nbsp;<?= $book->ebook_author ?></span>
+                                <!--end::Desc-->
+                            </div>
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-dark">Año: &nbsp;<?= $book->ebook_year ?></span>
+                                <!--end::Desc-->
+                            </div>
+                            <!--end::Section-->
                         </div>
+                        
+                        <!--end::Info-->
                     </div>
+                    <!--end::Item-->
                     <?php endforeach; ?>
+                    
                 </div>
             </div>
         </div>

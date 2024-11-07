@@ -1207,5 +1207,19 @@ class AdminController extends CI_Controller
             redirect('/login');
         }
     }
+
+    public function viewClientInfo()
+    {
+        if ($this->session->userdata('user_rol') == 'admin') {
+            //$data['books'] = ViewBookEloquent::lastViews();
+            $data['content'] = 'admin/clientInfo';
+            $this->load->view('admin/templateAdmin', $data);
+        } else {
+            $this->session->set_flashdata('error');
+            redirect('/login');
+        }
+    }
+
+
 }
 /* End of file Controllername.php */

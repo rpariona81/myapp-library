@@ -246,7 +246,7 @@
                         </div>
 
                         <div class="menu-item">
-                            <a class="menu-link" href="<?= base_url('admin') . '/custom' ?>">
+                            <a class="menu-link" href="<?= base_url('admin') . '/info' ?>">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotone/Shopping/Credit-card.svg-->
                                     <span class="svg-icon svg-icon-2">
@@ -265,16 +265,16 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">Personalización</span>
+                                <span class="menu-title">Información del instituto</span>
 
                             </a>
 
                         </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="<?= base_url('admin') . '/infosistema' ?>">
+                        <!--<div class="menu-item">
+                            <a class="menu-link" href="< ?= base_url('admin') . '/infosistema' ?>">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotone/General/Shield-protected.svg-->
-                                    <span class="svg-icon svg-icon-2">
+                                    <!--<span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
                                             viewBox="0 0 24 24" version="1.1">
@@ -290,18 +290,17 @@
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->
-                                </span>
+                                <!--</span>
                                 <span class="menu-title">Información del sistema</span>
 
                             </a>
+                        </div>-->
 
-
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="<?= base_url('admin') . '/soporte' ?>">
+                        <!--<div class="menu-item">
+                            <a class="menu-link" href="< ?= base_url('admin') . '/soporte' ?>">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotone/Interface/Doughnut.svg-->
-                                    <span class="svg-icon svg-icon-2">
+                                    <!--<span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none">
                                             <path opacity="0.25" fill-rule="evenodd" clip-rule="evenodd"
@@ -313,10 +312,10 @@
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->
-                                </span>
+                                <!--</span>
                                 <span class="menu-title">Soporte técnico</span>
                             </a>
-                        </div>
+                        </div>-->
 
                         <div class="menu-item">
                             <div class="menu-content">
