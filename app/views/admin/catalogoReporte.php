@@ -29,7 +29,7 @@
                                 </button>
 
                                 &nbsp;
-                                <a class="btn btn-danger" href="<?= base_url('/admin/catalogo') ?>">Limpiar filtro</a>
+                                <a class="btn btn-danger" href="<?= base_url('/admin/reportes') ?>">Limpiar filtro</a>
 
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                                             }
                                             ?>
 
-                                            <a class="btn btn-outline-warning btn-sm" data-bs-toggle="tooltip" data-bs-placement="left" title="Editar" href="<?= base_url('/admin/ebook/' . $item->id) ?>"><i class="fa fa-edit"></i></a>
+                                            <!-- <a class="btn btn-outline-warning btn-sm" data-bs-toggle="tooltip" data-bs-placement="left" title="Editar" href="< ?= base_url('/admin/ebook/' . $item->id) ?>"><i class="fa fa-edit"></i></a> -->
                                         </div>
                                     </td>
 

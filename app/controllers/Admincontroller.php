@@ -1220,7 +1220,7 @@ class AdminController extends CI_Controller
         }
     }
 
-    public function viewReaders($id = NULL)
+    public function viewReaders()
     {
         //$example = [];
         //$data['example']=ViewBookEloquent::getNumberViewsByBook();
@@ -1230,7 +1230,7 @@ class AdminController extends CI_Controller
             $catalog_id = $this->input->post('catalog_id', true);
             $data['selectValue'] = isset($catalog_id) ? $catalog_id : null;
             $data['catalogs'] = BookEloquent::getCatalogs();
-            $data['query']=ViewBookEloquent::getNumberViewsByBook();
+            $data['query']=ViewBookEloquent::getNumberViewsByBook($catalog_id);
             $data['content'] = 'admin/catalogoReporte';
             $this->load->view('admin/templateAdmin', $data);
         } else {

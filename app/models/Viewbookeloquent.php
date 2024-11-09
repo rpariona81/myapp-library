@@ -76,8 +76,8 @@ class ViewBookEloquent extends BaseModel
                 })
                 ->distinct('t_ebooks.id')
                 ->where('t_catalogs.id', '=', $catalog_id)
-                ->orderBy('t_ebooks_views.updated_at', 'desc')
-                ->get(['t_ebooks.*', 't_catalogs.catalog_display', 'cantReaders.cantReaders']);
+                ->orderBy('cantReaders.lastView', 'desc')
+                ->get(['t_ebooks.*', 't_catalogs.catalog_display', 'cantReaders.cantReaders','cantReaders.lastView']);
         } else {
             $data = ViewBookEloquent::leftjoin('t_ebooks', 't_ebooks.id', '=', 't_ebooks_views.ebook_id')
                 ->leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
@@ -85,7 +85,7 @@ class ViewBookEloquent extends BaseModel
                     $join->on('t_ebooks.id', '=', 'cantReaders.ebook_id');
                 })
                 ->distinct('t_ebooks.id')
-                ->orderBy('t_ebooks_views.updated_at', 'desc')
+                ->orderBy('cantReaders.lastView', 'desc')
                 ->get(['t_ebooks.*', 't_catalogs.catalog_display', 'cantReaders.cantReaders','cantReaders.lastView']);
         }
 
