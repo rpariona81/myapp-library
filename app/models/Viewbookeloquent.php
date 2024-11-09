@@ -31,7 +31,8 @@ class ViewBookEloquent extends BaseModel
 
     protected $casts = [
         'status' => 'boolean',
-        'updated_at' => 'datetime:Y-m-d'
+        'updated_at' => 'datetime:Y-m-d',
+        'lastView' => 'datetime:Y-m-d'
     ];
 
     public function getFlagAttribute()
@@ -58,5 +59,36 @@ class ViewBookEloquent extends BaseModel
                 't_catalogs.catalog_name',
                 't_catalogs.catalog_display'
             ]);
+    }
+
+    public static function getNumberViewsByBook($catalog_id = NULL)
+    {
+
+        $cantReaders = DB::table('t_ebooks_views')
+            ->selectRaw('count(distinct(user_id)) as cantReaders, max(created_at) as lastView, ebook_id')
+            ->groupBy('ebook_id');
+
+        if ($catalog_id != NULL) {
+            $data = ViewBookEloquent::leftjoin('t_ebooks', 't_ebooks.id', '=', 't_ebooks_views.ebook_id')
+                ->leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
+                ->leftjoinSub($cantReaders, 'cantReaders', function ($join) {
+                    $join->on('t_ebooks.id', '=', 'cantReaders.ebook_id');
+                })
+                ->distinct('t_ebooks.id')
+                ->where('t_catalogs.id', '=', $catalog_id)
+                ->orderBy('t_ebooks_views.updated_at', 'desc')
+                ->get(['t_ebooks.*', 't_catalogs.catalog_display', 'cantReaders.cantReaders']);
+        } else {
+            $data = ViewBookEloquent::leftjoin('t_ebooks', 't_ebooks.id', '=', 't_ebooks_views.ebook_id')
+                ->leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
+                ->leftjoinSub($cantReaders, 'cantReaders', function ($join) {
+                    $join->on('t_ebooks.id', '=', 'cantReaders.ebook_id');
+                })
+                ->distinct('t_ebooks.id')
+                ->orderBy('t_ebooks_views.updated_at', 'desc')
+                ->get(['t_ebooks.*', 't_catalogs.catalog_display', 'cantReaders.cantReaders','cantReaders.lastView']);
+        }
+
+        return $data;
     }
 }

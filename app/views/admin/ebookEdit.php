@@ -43,22 +43,22 @@
                 <div class="row pt-3">
                     <div class="col-md-4">
                         <label for="ebook_author">Autor</label>
-                        <input type="text" class="form-control" id="ebook_author" name="ebook_author" value="<?= $item->ebook_author ?>">
+                        <input type="text" class="form-control" id="ebook_author" name="ebook_author" value="<?= ($item->ebook_author != NULL) ? $item->ebook_author : '' ?>">
 
                     </div>
                     <div class="col-md-4">
                         <label for="ebook_editorial">Editorial</label>
-                        <input type="text" class="form-control" id="ebook_editorial" name="ebook_editorial" value="<?= $item->ebook_editorial ?>">
+                        <input type="text" class="form-control" id="ebook_editorial" name="ebook_editorial" value="<?= ($item->ebook_editorial != NULL) ? $item->ebook_editorial : '' ?>">
 
                     </div>
                     <div class="col-md-2">
                         <label for="ebook_year">Año</label>
-                        <input type="text" class="form-control" id="ebook_year" name="ebook_year" value="<?= $item->ebook_year ?>">
+                        <input type="text" class="form-control" id="ebook_year" name="ebook_year" value="<?= ($item->ebook_year != NULL) ? $item->ebook_year : '' ?>">
 
                     </div>
                     <div class="col-md-2">
                         <label for="ebook_pages"># páginas</label>
-                        <input type="text" class="form-control" id="ebook_pages" name="ebook_pages" value="<?= $item->ebook_pages ?>">
+                        <input type="text" class="form-control" id="ebook_pages" name="ebook_pages" value="<?= ($item->ebook_pages != NULL) ? $item->ebook_pages : '' ?>">
 
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                     <div class="col-md-12">
                         <label for="ebook_details">Detalles</label>
                         <textarea class="form-control" id="ebook_details" name="ebook_details">
-                            <?= trim($item->ebook_details) ?>
+                            <?= ($item->ebook_details != NULL) ? trim($item->ebook_details) : '' ?>
                         </textarea>
                     </div>
                 </div>
@@ -79,7 +79,9 @@
                         <label>Archivo actual</label>
                         <br>
                         <strong>Descarga:</strong>
-                        <a class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="<?= $item->ebook_file ?>" target="_blank" download="<?= $item->ebook_file; ?>" href="<?= base_url('uploads/pdf/' . $item->ebook_file); ?>">
+                        <a class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="right"
+                            title="<?= ($item->ebook_file != NULL) ? $item->ebook_file : '' ?>" target="_blank"
+                            download="<?= ($item->ebook_file != NULL) ? $item->ebook_file : '' ?>" href="<?= base_url('uploads/pdf/' . $item->ebook_file); ?>">
                             <i class="fa fa-file-pdf"></i>
                             <strong><?= $item->ebook_code ?></strong>
                         </a>
@@ -104,7 +106,7 @@
                                 <!--<div class="alert">-->
                                 <div id="alert-msg">
                                     <div id="alert-title">
-                                        
+
                                     </div>
                                 </div>
                                 <!--</div>-->

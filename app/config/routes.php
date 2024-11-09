@@ -116,3 +116,5 @@ $route['admin/perfil'] = 'admincontroller/viewPerfil';
 $route['admin/claves'] = 'admincontroller/viewClave';
 
 $route['admin/info'] = 'admincontroller/viewClientInfo';
+
+$route['admin/lectores'] = 'admincontroller/viewReaders';

@@ -1220,6 +1220,23 @@ class AdminController extends CI_Controller
         }
     }
 
-
+    public function viewReaders($id = NULL)
+    {
+        //$example = [];
+        //$data['example']=ViewBookEloquent::getNumberViewsByBook();
+        //print_r(json_encode($example));
+        
+        if ($this->session->userdata('user_rol') == 'admin') {
+            $catalog_id = $this->input->post('catalog_id', true);
+            $data['selectValue'] = isset($catalog_id) ? $catalog_id : null;
+            $data['catalogs'] = BookEloquent::getCatalogs();
+            $data['query']=ViewBookEloquent::getNumberViewsByBook();
+            $data['content'] = 'admin/catalogoReporte';
+            $this->load->view('admin/templateAdmin', $data);
+        } else {
+            $this->session->set_flashdata('error');
+            redirect('/login');
+        }
+    }
 }
 /* End of file Controllername.php */
