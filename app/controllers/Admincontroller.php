@@ -1220,18 +1220,38 @@ class AdminController extends CI_Controller
         }
     }
 
-    public function viewReaders()
+    public function countReaders()
     {
         //$example = [];
         //$data['example']=ViewBookEloquent::getNumberViewsByBook();
         //print_r(json_encode($example));
-        
+
         if ($this->session->userdata('user_rol') == 'admin') {
             $catalog_id = $this->input->post('catalog_id', true);
             $data['selectValue'] = isset($catalog_id) ? $catalog_id : null;
             $data['catalogs'] = BookEloquent::getCatalogs();
-            $data['query']=ViewBookEloquent::getNumberViewsByBook($catalog_id);
+            $data['query'] = ViewBookEloquent::getNumberViewsByBook($catalog_id);
             $data['content'] = 'admin/catalogoReporte';
+            $this->load->view('admin/templateAdmin', $data);
+        } else {
+            $this->session->set_flashdata('error');
+            redirect('/login');
+        }
+    }
+
+
+    public function viewReaders($ebook_id = NULL)
+    {
+        //$example = [];
+        //print_r($id);
+        /*
+        $example = ViewBookEloquent::getListReadersByBook($ebook_id);
+        print_r(json_encode($example));
+        */
+
+        if ($this->session->userdata('user_rol') == 'admin') {
+            $data['records'] = ViewBookEloquent::getListReadersByBook($ebook_id);
+            $data['content'] = 'admin/ebookReaders';
             $this->load->view('admin/templateAdmin', $data);
         } else {
             $this->session->set_flashdata('error');

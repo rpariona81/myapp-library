@@ -100,9 +100,8 @@ $route['admin/catalogo'] = 'admincontroller/verCatalogo';
 $route['admin/detalle/(:num)'] = 'admincontroller/verLibro/$1';
 $route['admin/ebook/(:num)'] = 'admincontroller/editaEbook/$1';
 
-$route['admin/reportes'] = 'admincontroller/viewReaders';
-//$route['admin/reportes/(:num)'] = 'admincontroller/verReportes/$1';
-//$route['admin/reportes/(:num)'] = 'admincontroller/verReporte/$1';
+$route['admin/reportes'] = 'admincontroller/countReaders';
+$route['admin/lectores/(:num)'] = 'admincontroller/viewReaders/$1';
 
 $route['admin/programas'] = 'admincontroller/verProgramas';
 $route['admin/newprograma'] = 'admincontroller/nuevoPrograma';

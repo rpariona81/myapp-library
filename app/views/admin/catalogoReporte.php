@@ -81,7 +81,7 @@
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <?php
                                             if ($item->status) {
-                                                echo '<a name="Detalle" href="' . base_url('/admin/detalle/' . $item->id) . '" class="btn btn-primary btn-sm display-inline" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver detalles"><i class="fa fa-eye"></i></button></a>';
+                                                echo '<a name="Detalle" href="' . base_url('/admin/lectores/' . $item->id) . '" class="btn btn-primary btn-sm display-inline" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver Lectores"><i class="fa fa-eye"></i></button></a>';
                                             }
                                             ?>
 

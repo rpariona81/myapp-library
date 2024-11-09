@@ -126,6 +126,7 @@ use laboratorio_ci;
 -- newapp.t_catalogs definition
 DROP TABLE IF EXISTS `t_ebooks_views`;
 CREATE TABLE `t_ebooks_views` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ebook_id` bigint(20) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   `status` tinyint(1) DEFAULT 1,
@@ -133,8 +134,9 @@ CREATE TABLE `t_ebooks_views` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-      FOREIGN KEY (ebook_id) REFERENCES t_ebooks(id),
-    FOREIGN KEY (user_id) REFERENCES t_users(id)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (ebook_id) REFERENCES t_ebooks(id),
+  FOREIGN KEY (user_id) REFERENCES t_users(id)
 )
 
 use laboratorio_ci;

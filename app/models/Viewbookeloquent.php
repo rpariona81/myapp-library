@@ -29,6 +29,8 @@ class ViewBookEloquent extends BaseModel
         'status'
     ];
 
+    protected $hidden = ['password'];
+
     protected $casts = [
         'status' => 'boolean',
         'updated_at' => 'datetime:Y-m-d',
@@ -77,7 +79,7 @@ class ViewBookEloquent extends BaseModel
                 ->distinct('t_ebooks.id')
                 ->where('t_catalogs.id', '=', $catalog_id)
                 ->orderBy('cantReaders.lastView', 'desc')
-                ->get(['t_ebooks.*', 't_catalogs.catalog_display', 'cantReaders.cantReaders','cantReaders.lastView']);
+                ->get(['t_ebooks.*', 't_catalogs.catalog_display', 'cantReaders.cantReaders', 'cantReaders.lastView']);
         } else {
             $data = ViewBookEloquent::leftjoin('t_ebooks', 't_ebooks.id', '=', 't_ebooks_views.ebook_id')
                 ->leftjoin('t_catalogs', 't_ebooks.catalog_id', '=', 't_catalogs.id')
@@ -86,9 +88,61 @@ class ViewBookEloquent extends BaseModel
                 })
                 ->distinct('t_ebooks.id')
                 ->orderBy('cantReaders.lastView', 'desc')
-                ->get(['t_ebooks.*', 't_catalogs.catalog_display', 'cantReaders.cantReaders','cantReaders.lastView']);
+                ->get(['t_ebooks.*', 't_catalogs.catalog_display', 'cantReaders.cantReaders', 'cantReaders.lastView']);
         }
 
         return $data;
     }
+
+    public static function getListReadersByBook($ebook_id = NULL)
+    {
+        /*
+        select *
+        from t_users left join t_careers on t_users.career_id=t_careers.id 
+        where t_users.id in 
+        (select DISTINCT t_ebooks_views.user_id from t_ebooks_views left join t_users on t_ebooks_views.user_id=t_users.id where ebook_id=5);
+        */
+
+        /*$data = DB::select('select *
+        from t_users left join t_careers on t_users.career_id=t_careers.id 
+        where t_users.id in 
+        (select DISTINCT t_ebooks_views.user_id from t_ebooks_views where ebook_id=' . $ebook_id . ')');
+        return json_encode($data);*/
+
+        /*$listReaders = DB::table('t_ebooks_views')
+            ->selectRaw('distinct(user_id) as user_id')
+            ->where('ebook_id', '=', $ebook_id);
+        */
+        //return $listReaders;
+
+
+        if ($ebook_id != NULL) {
+            $data = ViewBookEloquent::leftjoin('t_users', 't_users.id', '=', 't_ebooks_views.user_id')
+                ->leftjoin('t_careers', 't_users.career_id', '=', 't_careers.id')
+                ->leftjoin('t_ebooks', 't_ebooks.id', '=', 't_ebooks_views.ebook_id')
+                ->distinct('t_users.id')
+                ->where('t_ebooks_views.ebook_id', '=', $ebook_id)
+                ->get(['t_users.*', 't_careers.career_title','t_ebooks.ebook_display']);
+        }
+        return $data;
+    }
+    /*
+        try {
+            $data = [];
+            if ($ebook_id != NULL) {
+                $data = ViewBookEloquent::leftjoin('t_users', 't_users.id', '=', 't_ebooks_views.user_id')
+                    ->leftjoin('t_careers', 't_users.career_id', '=', 't_careers.id')
+                    ->distinct('t_users.id')
+                    //->max('t_ebooks_views.created_at')
+                    ->where('t_ebooks_views.ebook_id', '=', $ebook_id)
+                    ->get(['t_users.*', 't_careers.career_title', 't_ebooks_views.created_at']);
+            }
+            //return $data;
+            print_r($data);
+            exit();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+        //return $data;
+        */
 }
