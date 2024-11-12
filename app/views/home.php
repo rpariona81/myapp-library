@@ -49,12 +49,40 @@
 					<!--<div class="w-lg-500px p-10">-->
 					<div class="w-lg-500px p-10 p-lg-15 mx-auto">
 						<div class="col-12 text-center">
-							<img alt="Logo" src="{{os.getenv('APP_LOGIN')}} ?>" class="h-120px h-lg-150px" />
+						<img alt="Logo"
+                                src="<?php echo (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGIN') ?>"
+                                class="h-120px h-lg-150px" />
 
 						</div><!--begin::Menu separator-->
 						<div class="separator my-2"></div>
 						<!--end::Menu separator--><br>
-						
+						<?php
+						$username = array(
+							'name' => 'username',
+							'class' => 'form-control m-top-10',
+							'type' => 'text',
+							'id' => 'username',
+							'autocomplete' => 'off',
+							'placeholder' => 'Usuario',
+						);
+
+						$password = array(
+							'name' => 'password',
+							'class' => 'form-control m-top-10',
+							'type' => 'password',
+							'id' => 'password',
+							'autocomplete' => 'off',
+							'placeholder' => 'Contraseña',
+						);
+
+						$login_submit = array(
+							'name' => 'login_submit',
+							'class' => 'btn btn-primary m-top-10',
+							'value' => 'Ingresar',
+							'id' => 'kt_sign_in_submit'
+						);
+
+						echo form_open('authcontroller/login', array('class' => 'form w-100', 'id' => 'kt_sign_in_form')); ?>
 						<!--begin::Heading-->
 						<div class="text-center mb-11">
 							<!--begin::Title-->
@@ -66,12 +94,14 @@
 						<!--begin::Heading-->
 
 						<div class="fv-row mb-8">
-							
+							<?php echo form_input($username);
+							echo '<div class="error">' . form_error('login_email') . '</div>'; ?>
 						</div>
 						<div class="fv-row mb-3">
-							
+							<?php echo form_input($password);
+							echo '<div class="error">' . form_error('login_password') . '</div>'; ?>
 						</div>
-						<p></p>
+						<p><?= my_error($this->session->flashdata('error')) ?></p>
 						<!--begin::Wrapper-->
 						<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
 							<div></div>
@@ -83,7 +113,7 @@
 						</div>
 						<div class="d-grid mb-10">
 							<!--end::Wrapper-->
-							
+							<?php echo form_submit($login_submit); ?>
 						</div>
 						<?php echo form_close();
 						?>
@@ -118,7 +148,7 @@
 
 				<div class="d-flex flex-column-auto justify-content-between mt-15">
 					<div class="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">
-						<img alt="LogoEmpresa" src="/assets/property/logoEmpresa.png" class="h-20px h-lg-30px" />
+						<img alt="LogoEmpresa" src="<?= base_url('/assets/property/logoEmpresa.png') ?>" class="h-20px h-lg-30px" />
 					</div>
 					<div class="d-flex fw-semibold text-primary fs-base gap-5">
 						<a href="#" target="_blank">Términos y condiciones</a>
