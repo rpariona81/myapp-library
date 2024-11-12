@@ -15,8 +15,8 @@ class HomeController extends CI_Controller
         if ($this->session->userdata('user_guard') != NULL) {
             redirect(base_url() . $this->session->userdata('user_guard'));
         }
-        $this->load->view('home');
-        //$this->load->view('hometest');
+        //$this->load->view('home');
+        $this->load->view('auth/login');
     }
 
     public function logout()
