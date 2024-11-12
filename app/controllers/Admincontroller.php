@@ -307,7 +307,7 @@ class AdminController extends CI_Controller
                 $mail->isHTML(true);               // Set email format to HTML
                 $mail->Subject = "Recuperación de contraseña";
                 $datosPostulante = "Estimado " . $user['name'] . " " . $user['paternal_surname'] . ", a su solicitud;<br>";
-                $msjUsuario = "Se remite su contraseña para acceder a la bolsa laboral es: <strong>" . base64_decode($user->remember_token) . "</strong><br>";
+                $msjUsuario = "Se remite su contraseña para acceder a la biblioteca virtual es: <strong>" . base64_decode($user->remember_token) . "</strong><br>";
                 $mail->Body    = $datosPostulante . "<br><p>" . $msjUsuario . "</p>";
                 $mail->AltBody = strip_tags($msjUsuario);
                 $mail->send();
