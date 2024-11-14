@@ -318,7 +318,8 @@ class AdminController extends CI_Controller
                 //$status_sendemail = FALSE;
                 $this->session->set_flashdata('flashError', 'Error de envio de correo.');
             }
-            redirect('/admin/estudiantes', 'refresh');
+            //redirect('/admin/estudiantes', 'refresh');
+            redirect_back();
         } else {
             $this->session->set_flashdata('error');
             redirect('/login');
@@ -461,9 +462,11 @@ class AdminController extends CI_Controller
             $model = UserEloquent::find($id);
             $model->status = 0;
             $model->save();
+            $this->session->set_flashdata('success', 'Usuario ' . $model['username'] . ' desactivado.');
             redirect('/admin/estudiantes', 'refresh');
         } else {
-            $this->session->set_flashdata('error');
+            //$this->session->set_flashdata('error');
+            $this->session->set_flashdata('error', 'Error en activación.');
             redirect('/login');
         }
     }
@@ -475,9 +478,11 @@ class AdminController extends CI_Controller
             $model = UserEloquent::find($id);
             $model->status = 1;
             $model->save();
+            $this->session->set_flashdata('success', 'Usuario ' . $model['username'] . ' activado.');
             redirect('/admin/estudiantes', 'refresh');
         } else {
-            $this->session->set_flashdata('error');
+            //$this->session->set_flashdata('error');
+            $this->session->set_flashdata('error', 'Error en activación.');
             redirect('/login');
         }
     }
@@ -637,6 +642,7 @@ class AdminController extends CI_Controller
             $model = UserEloquent::find($id);
             $model->status = FALSE;
             $model->save();
+            $this->session->set_flashdata('success', 'Usuario ' . $model['username'] . ' desactivado.');
             redirect('/admin/docentes', 'refresh');
         } else {
             $this->session->set_flashdata('error');
@@ -651,6 +657,7 @@ class AdminController extends CI_Controller
             $model = UserEloquent::find($id);
             $model->status = TRUE;
             $model->save();
+            $this->session->set_flashdata('success', 'Usuario ' . $model['username'] . ' activado.');
             redirect('/admin/docentes', 'refresh');
         } else {
             $this->session->set_flashdata('error');

@@ -60,7 +60,7 @@
                                 <th>F. nacimiento</th>
                                 <th>Condición</th>
                                 <th>Última actualización</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
@@ -68,13 +68,14 @@
                                 <tr class="align-middle">
                                     <td class="align-middle"><?= str_pad($item->id, 5, '0', STR_PAD_LEFT); ?></td>
                                     <td>
-                                    <div class="d-flex flex-column">
+                                        <div class="d-flex flex-column">
                                             <strong class="text-gray-800 text-hover-primary mb-1"><?= $item->username ?></strong>
                                             <span><?= $item->email ?></span>
                                         </div>
                                     </td>
                                     <!-- <td></td> -->
-                                    <td><div class="d-flex flex-column">
+                                    <td>
+                                        <div class="d-flex flex-column">
                                             <strong class="text-hover-primary mb-1"><?= $item->name . ' ' . $item->paternal_surname . ' ' . $item->maternal_surname ?></strong>
                                             <span class="text-gray-800"><?= $item->career_title ?></span>
                                         </div>
@@ -99,13 +100,13 @@
 
                                                 echo form_open('admincontroller/desactivaEstudiante');
                                                 echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
-                                                echo '<button type="submit" name="submit" class="btn btn-outline-danger btn-sm display-inline" data-bs-toggle="tooltip" data-bs-placement="left" title="Desactivar"><i class="fa fa-eye-slash"></i></button>';
+                                                echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-danger btn-sm display-inline" data-bs-toggle="tooltip" data-bs-placement="left" title="Desactivar"><i class="fa fa-eye-slash"></i></button>';
                                                 echo form_close();
                                             } else {
                                                 //echo '<a class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Activar" href="<?= $item->id>"><i class="fa fa fa-eye"></i></a>';
                                                 echo form_open('admincontroller/activaEstudiante');
                                                 echo '<input type="hidden" id="id" name="id" value="' . $item->id . '">';
-                                                echo '<button type="submit" name="submit" class="btn btn-outline-primary btn-sm display-inline" data-bs-toggle="tooltip" data-bs-placement="left" title="Activar"><i class="fa fa-eye"></i></button>';
+                                                echo '<button type="submit" id="showtoast" name="submit" class="btn btn-outline-primary btn-sm display-inline" data-bs-toggle="tooltip" data-bs-placement="left" title="Activar"><i class="fa fa-eye"></i></button>';
                                                 echo form_close();
                                             }
                                             ?>
@@ -126,7 +127,7 @@
                                     </td>
                                     <td class="text-center"><?= $item->graduated ?></td>
                                     <td><?= $item->updated_at ?></td>
-                                    
+
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -136,3 +137,34 @@
         </div>
     </div>
 </div>
+<script src="<?= base_url('assets/plugins/pdfobject/jquery-3.7.1.min.js') ?>"></script>
+<script>
+    jQuery(document).ready(function() {
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": false,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        <?php if ($this->session->flashdata('success')) { ?>
+            //$('.toast').toast('show');
+            toastr.info("<?= $this->session->flashdata('success') ?>");
+            console.log("<?= $this->session->flashdata('success') ?>");
+        <?php } else if ($this->session->flashdata('error')) {  ?>
+            toastr.error("<?= $this->session->flashdata('error') ?>");
+        <?php } else if ($this->session->flashdata('flashSuccess')) { ?>
+            toastr.success("<?= $this->session->flashdata('flashSuccess') ?>");
+        <?php } ?>
+    });
+</script>

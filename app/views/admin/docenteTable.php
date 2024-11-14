@@ -60,7 +60,7 @@
                                 <th>F. nacimiento</th>
                                 <th>Condición</th>
                                 <th>Última actualización</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
@@ -68,7 +68,7 @@
                                 <tr class="align-middle">
                                     <td class="align-middle"><?= str_pad($item->id, 5, '0', STR_PAD_LEFT); ?></td>
                                     <td>
-                                    <div class="d-flex flex-column">
+                                        <div class="d-flex flex-column">
                                             <strong class="text-gray-800 text-hover-primary mb-1"><?= $item->username ?></strong>
                                             <span><?= $item->email ?></span>
                                         </div>
@@ -126,7 +126,7 @@
                                     </td>
                                     <td class="text-center"><?= $item->graduated ?></td>
                                     <td><?= $item->updated_at ?></td>
-                                    
+
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -136,3 +136,34 @@
         </div>
     </div>
 </div>
+<script src="<?= base_url('assets/plugins/pdfobject/jquery-3.7.1.min.js') ?>"></script>
+<script>
+    jQuery(document).ready(function() {
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": false,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        <?php if ($this->session->flashdata('success')) { ?>
+            //$('.toast').toast('show');
+            toastr.info("<?= $this->session->flashdata('success') ?>");
+            console.log("<?= $this->session->flashdata('success') ?>");
+        <?php } else if ($this->session->flashdata('error')) {  ?>
+            toastr.error("<?= $this->session->flashdata('error') ?>");
+        <?php } else if ($this->session->flashdata('flashSuccess')) { ?>
+            toastr.success("<?= $this->session->flashdata('flashSuccess') ?>");
+        <?php } ?>
+    });
+</script>

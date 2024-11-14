@@ -22,6 +22,7 @@
     <link href="<?= base_url() ?>assets/css/vendor/buttons.bootstrap5.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>assets/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css" />
 
+    <link href="<?= base_url() ?>assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
     <!--<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>-->
     <script src="<?= base_url('assets/plugins/tinymce/tinymce.min.js') ?>"></script>
     <script>
@@ -612,6 +613,7 @@
     <script src="<?= base_url() ?>assets/js/vendor/jszip.min.js"></script>
 
 
+    <script src="<?= base_url() ?>assets/plugins/toastr/toastr.min.js"></script>
 
     <script>
     //document.addEventListener("DOMContentLoaded", function() {
