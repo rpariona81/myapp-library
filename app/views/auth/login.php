@@ -62,38 +62,38 @@ License: For each use you must have a valid license purchased only from above li
                         <div class="col-12 text-center">
                             <img alt="Logo"
                                 src="<?php echo (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGIN') ?>"
-                                class="h-120px h-lg-150px" />
+                                class="h-90px h-lg-120px" />
                         </div>
                         <!--begin::Menu separator-->
                         <div class="separator my-2"></div>
                         <!--end::Menu separator--><br>
                         <?php
-						$username = array(
-							'name' => 'username',
-							'class' => 'form-control m-top-10',
-							'type' => 'text',
-							'id' => 'username',
-							'autocomplete' => 'off',
-							'placeholder' => 'Usuario',
-						);
+                        $username = array(
+                            'name' => 'username',
+                            'class' => 'form-control m-top-10',
+                            'type' => 'text',
+                            'id' => 'username',
+                            'autocomplete' => 'off',
+                            'placeholder' => 'Usuario',
+                        );
 
-						$password = array(
-							'name' => 'password',
-							'class' => 'form-control m-top-10',
-							'type' => 'password',
-							'id' => 'password',
-							'autocomplete' => 'off',
-							'placeholder' => 'Contraseña',
-						);
+                        $password = array(
+                            'name' => 'password',
+                            'class' => 'form-control m-top-10',
+                            'type' => 'password',
+                            'id' => 'password',
+                            'autocomplete' => 'off',
+                            'placeholder' => 'Contraseña',
+                        );
 
-						$login_submit = array(
-							'name' => 'login_submit',
-							'class' => 'btn btn-primary m-top-10',
-							'value' => 'Ingresar',
-							'id' => 'kt_sign_in_submit'
-						);
+                        $login_submit = array(
+                            'name' => 'login_submit',
+                            'class' => 'btn btn-primary m-top-10',
+                            'value' => 'Ingresar',
+                            'id' => 'kt_sign_in_submit'
+                        );
 
-						echo form_open('logon', array('class' => 'form w-100', 'id' => 'kt_sign_in_form')); ?>
+                        echo form_open('logon', array('class' => 'form w-100', 'id' => 'kt_sign_in_form')); ?>
                         <!--begin::Heading-->
                         <div class="text-center mb-11">
                             <!--begin::Title-->
@@ -106,11 +106,11 @@ License: For each use you must have a valid license purchased only from above li
 
                         <div class="fv-row mb-8">
                             <?php echo form_input($username);
-							echo '<div class="error">' . form_error('login_email') . '</div>'; ?>
+                            echo '<div class="error">' . form_error('login_email') . '</div>'; ?>
                         </div>
                         <div class="fv-row mb-3">
                             <?php echo form_input($password);
-							echo '<div class="error">' . form_error('login_password') . '</div>'; ?>
+                            echo '<div class="error">' . form_error('login_password') . '</div>'; ?>
                         </div>
                         <p><?= my_error($this->session->flashdata('error')) ?></p>
                         <!--begin::Wrapper-->
@@ -127,7 +127,7 @@ License: For each use you must have a valid license purchased only from above li
                             <?php echo form_submit($login_submit); ?>
                         </div>
                         <?php echo form_close();
-						?>
+                        ?>
                         <!--begin::Sign up-->
                         <div class="text-gray-500 text-center fw-semibold fs-6">
                             No tiene cuenta?
