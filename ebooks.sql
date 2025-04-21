@@ -122,6 +122,7 @@ INSERT INTO t_ebooks(ebook_code,ebook_display) VALUES(2035,'2035');
 
 
 
+
 use laboratorio_ci;
 -- newapp.t_catalogs definition
 DROP TABLE IF EXISTS `t_ebooks_views`;

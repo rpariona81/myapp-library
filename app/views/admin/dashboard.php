@@ -29,7 +29,8 @@
                                 </svg>&nbsp;<?= $cantEstudEgres ?>
                             </span>
                             <!--end::Svg Icon-->
-                            <a href="<?= base_url('admin') . '/estudiantes' ?>" class="text-warning fw-bold fs-6">Estudiantes activos</a>
+                            <a href="<?= base_url('admin') . '/estudiantes' ?>"
+                                class="text-warning fw-bold fs-6">Estudiantes activos</a>
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
@@ -47,7 +48,8 @@
                                 </svg>&nbsp;<?= $cantBooks ?>
                             </span>
                             <!--end::Svg Icon-->
-                            <a href="<?= base_url('admin') . '/catalogo' ?>" class="text-primary fw-bold fs-6">Libros disponibles</a>
+                            <a href="<?= base_url('admin') . '/catalogo' ?>" class="text-primary fw-bold fs-6">Libros
+                                disponibles</a>
                         </div>
                         <!--end::Col-->
                     </div>
@@ -69,7 +71,8 @@
                                 </svg>&nbsp;<?= $cantCareers ?>
                             </span>
                             <!--end::Svg Icon-->
-                            <a href="<?= base_url('admin') . '/programas' ?>" class="text-danger fw-bold fs-6 mt-2">Programas de estudios</a>
+                            <a href="<?= base_url('admin') . '/programas' ?>"
+                                class="text-danger fw-bold fs-6 mt-2">Programas de estudios</a>
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
@@ -84,10 +87,11 @@
                                     <path opacity="0.3"
                                         d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z"
                                         fill="black"></path>
-                                </svg>&nbsp;informes@tecnoicit
+                                </svg>&nbsp;<?= getenv('CLIENT_EMAIL') ?? '' ?>
                             </span>
                             <!--end::Svg Icon-->
-                            <a href="<?= base_url('admin') . '/info' ?>" class="text-success fw-bold fs-6 mt-2">Información del Instituto</a>
+                            <a href="<?= base_url('admin') . '/info' ?>"
+                                class="text-success fw-bold fs-6 mt-2">Información del Instituto</a>
                         </div>
                         <!--end::Col-->
                     </div>
@@ -114,31 +118,32 @@
                     <div class="row g-0 me-5">
 
                         <?php foreach ($cantUsersByCareer as $item) : ?>
-                            <!-- <div class="wrapper container"> -->
-                            <!--<div class="d-flex justify-content-between">
+                        <!-- <div class="wrapper container"> -->
+                        <!--<div class="d-flex justify-content-between">
                                 <h5 class="mb-2">< ?= $item->career_title ?></h5>
                                 <p class="mb-2 text-primary display-6">< ?= ($item->cant_Users) ? $item->cant_Users : 0 ?></p>
                             </div>
                             <div class="progress">
                                 <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="height:50px; width:<?= ($item->cant_Users / $cantEstudEgres) * 100 + 25 ?>%" aria-valuenow="<?= ($item->cant_Users / $cantEstudEgres) ?>" aria-valuemin="0" aria-valuemax="<?= $cantEstudEgres ?>"></div>
                             </div>-->
-                            <!--</div>--><br>
-                            <ul class="list-group list-group-flush">
+                        <!--</div>--><br>
+                        <ul class="list-group list-group-flush">
 
-                                <li class="list-group-item px-4 pb-4">
-                                    <p class="mb-2 font-weight-bold"><strong class="text-primary"><?= $item->career_title ?></strong>
-                                        <strong
-                                            class="float-end text-secondary"><?= ($item->cant_Users) ? $item->cant_Users : 0 ?></strong>
-                                    </p>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                                            role="progressbar"
-                                            style="height:50px; width:<?= ($item->cant_Users / $cantEstudEgres) * 100 + 25 ?>%"
-                                            aria-valuenow="<?= ($item->cant_Users / $cantEstudEgres) ?>" aria-valuemin="0"
-                                            aria-valuemax="<?= $cantEstudEgres ?>"></div>
-                                    </div>
-                                </li>
-                            </ul>
+                            <li class="list-group-item px-4 pb-4">
+                                <p class="mb-2 font-weight-bold"><strong
+                                        class="text-primary"><?= $item->career_title ?></strong>
+                                    <strong
+                                        class="float-end text-secondary"><?= ($item->cant_Users) ? $item->cant_Users : 0 ?></strong>
+                                </p>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+                                        role="progressbar"
+                                        style="height:50px; width:<?= ($item->cant_Users / $cantEstudEgres) * 100 + 25 ?>%"
+                                        aria-valuenow="<?= ($item->cant_Users / $cantEstudEgres) ?>" aria-valuemin="0"
+                                        aria-valuemax="<?= $cantEstudEgres ?>"></div>
+                                </div>
+                            </li>
+                        </ul>
 
                         <?php endforeach; ?>
                     </div>
@@ -165,53 +170,54 @@
                 ?>
                 <div class="container-fluid">
                     <?php foreach ($booksLast as $book) : ?>
-                        <!--begin::Item-->
-                        <div class="d-flex align-items-center mb-10 border-bottom pb-3 mb-3">
-                            <!--begin::Icon-->
-                            <i class="fas fa-book-open text-primary fs-1 me-5"></i>
-                            <!--end::SymIconbol-->
-                            <!--begin::Info-->
-                            <div class="d-flex flex-column">
-                                <h5 class="text-gray-800 fw-bolder">[Cód.
-                                    <?= str_pad($book->ebook_code, 6, '0', STR_PAD_LEFT) ?>
-                                    ]</span>&nbsp;<?= $book->ebook_display . ' <br>' ?> </h5>
-                                <!--begin::Section-->
-                                <div class="fw-bold">
-                                    <!--begin::Desc-->
-                                    <span class="text-muted"><?= $book->catalog_display ?></span>
-                                    <!--end::Desc-->
-                                </div>
-                                <div class="fw-bold">
-                                    <!--begin::Desc-->
-                                    <span class="text-dark"><?= $book->ebook_pages ?>&nbsp;páginas</span>
-                                    <!--end::Desc-->
-                                </div>
-                                <div class="fw-bold">
-                                    <!--begin::Desc-->
-                                    <span class="text-dark">Editorial: &nbsp;<?= $book->ebook_editorial ?></span>
-                                    <!--end::Desc-->
-                                </div>
-                                <div class="fw-bold">
-                                    <!--begin::Desc-->
-                                    <span class="text-dark">Autores: &nbsp;<?= $book->ebook_author ?></span>
-                                    <!--end::Desc-->
-                                </div>
-                                <div class="fw-bold">
-                                    <!--begin::Desc-->
-                                    <span class="text-dark">Año: &nbsp;<?= $book->ebook_year ?></span>
-                                    <!--end::Desc-->
-                                </div>
-                                <div class="fw-bold">
-                                    <!--begin::Desc-->
-                                    <span class="text-dark">Temas: &nbsp;<?= substr(strip_tags(htmlspecialchars_decode($book->ebook_details), "<div><b><br>"), 0, 100) ?></span>
-                                    <!--end::Desc-->
-                                </div>
-                                <!--end::Section-->
+                    <!--begin::Item-->
+                    <div class="d-flex align-items-center mb-10 border-bottom pb-3 mb-3">
+                        <!--begin::Icon-->
+                        <i class="fas fa-book-open text-primary fs-1 me-5"></i>
+                        <!--end::SymIconbol-->
+                        <!--begin::Info-->
+                        <div class="d-flex flex-column">
+                            <h5 class="text-gray-800 fw-bolder">[Cód.
+                                <?= str_pad($book->ebook_code, 6, '0', STR_PAD_LEFT) ?>
+                                ]</span>&nbsp;<?= $book->ebook_display . ' <br>' ?> </h5>
+                            <!--begin::Section-->
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-muted"><?= $book->catalog_display ?></span>
+                                <!--end::Desc-->
                             </div>
-
-                            <!--end::Info-->
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-dark"><?= $book->ebook_pages ?>&nbsp;páginas</span>
+                                <!--end::Desc-->
+                            </div>
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-dark">Editorial: &nbsp;<?= $book->ebook_editorial ?></span>
+                                <!--end::Desc-->
+                            </div>
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-dark">Autores: &nbsp;<?= $book->ebook_author ?></span>
+                                <!--end::Desc-->
+                            </div>
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-dark">Año: &nbsp;<?= $book->ebook_year ?></span>
+                                <!--end::Desc-->
+                            </div>
+                            <div class="fw-bold">
+                                <!--begin::Desc-->
+                                <span class="text-dark">Temas:
+                                    &nbsp;<?= substr(strip_tags(htmlspecialchars_decode($book->ebook_details), "<div><b><br>"), 0, 100) ?></span>
+                                <!--end::Desc-->
+                            </div>
+                            <!--end::Section-->
                         </div>
-                        <!--end::Item-->
+
+                        <!--end::Info-->
+                    </div>
+                    <!--end::Item-->
                     <?php endforeach; ?>
 
                 </div>
