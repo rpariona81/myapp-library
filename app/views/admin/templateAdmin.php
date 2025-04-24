@@ -59,9 +59,11 @@
             <!--begin::Brand-->
             <div class="aside-logo bg-secondary flex-column-auto" id="kt_aside_logo">
                 <!--begin::Logo-->
-                <a href="<?=base_url($this->session->userdata('user_rol'))?>">
+                <a href="<?= base_url($this->session->userdata('user_rol')) ?>">
                     <!--<img alt="Logo" src="< ?= base_url() ?>assets/media/logos/logo-1-dark.svg" class="h-15px logo" />-->
-                    <img alt="Logo" src="<?php echo  (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGO') ?>" class="h-60px logo" />
+                    <img alt="Logo"
+                        src="<?php echo (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGO') ?>"
+                        class="h-60px logo" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Aside toggler-->
@@ -275,7 +277,7 @@
                             <a class="menu-link" href="< ?= base_url('admin') . '/infosistema' ?>">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotone/General/Shield-protected.svg-->
-                                    <!--<span class="svg-icon svg-icon-2">
+                        <!--<span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
                                             viewBox="0 0 24 24" version="1.1">
@@ -291,7 +293,7 @@
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->
-                                <!--</span>
+                        <!--</span>
                                 <span class="menu-title">Información del sistema</span>
 
                             </a>
@@ -301,7 +303,7 @@
                             <a class="menu-link" href="< ?= base_url('admin') . '/soporte' ?>">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotone/Interface/Doughnut.svg-->
-                                    <!--<span class="svg-icon svg-icon-2">
+                        <!--<span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none">
                                             <path opacity="0.25" fill-rule="evenodd" clip-rule="evenodd"
@@ -313,7 +315,7 @@
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->
-                                <!--</span>
+                        <!--</span>
                                 <span class="menu-title">Soporte técnico</span>
                             </a>
                         </div>-->
@@ -410,7 +412,9 @@
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
                         <a href="index.html" class="d-lg-none">
                             <!--<img alt="Logo" src="<?= base_url() ?>assets/media/logos/logo-3.svg" class="h-30px" />-->
-                            <img alt="Logo" src="<?php echo  (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGO') ?>" class="h-30px"/>
+                            <img alt="Logo"
+                                src="<?php echo (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : base_url() . getenv('APP_LOGO') ?>"
+                                class="h-30px" />
                         </a>
                     </div>
                     <!--end::Mobile logo-->
@@ -534,11 +538,11 @@
                         <!-- <span class="text-muted fw-bold me-1">2021©</span>
                         <a href="" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a> -->
                         <img alt="LogoEmpresa" src="/assets/property/logoEmpresa.png" class="h-48px h-lg-60px" />
-					</div>
                     </div>
-                    <!--end::Copyright-->
-                    <!--begin::Menu-->
-                    <!-- <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
+                </div>
+                <!--end::Copyright-->
+                <!--begin::Menu-->
+                <!-- <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
                         <li class="menu-item">
                             <a href="https://keenthemes.com/faqs" target="_blank" class="menu-link px-2">About</a>
                         </li>
@@ -549,13 +553,13 @@
                             <a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
                         </li>
                     </ul> -->
-                    <!--end::Menu-->
-                </div>
-                <!--end::Container-->
+                <!--end::Menu-->
             </div>
-            <!--end::Footer-->
+            <!--end::Container-->
         </div>
-        <!--end::Wrapper-->
+        <!--end::Footer-->
+    </div>
+    <!--end::Wrapper-->
     </div>
     <!--end::Page-->
     </div>
