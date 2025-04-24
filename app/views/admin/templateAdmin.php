@@ -62,7 +62,7 @@
                 <a href="<?= base_url($this->session->userdata('user_rol')) ?>">
                     <!--<img alt="Logo" src="< ?= base_url() ?>assets/media/logos/logo-1-dark.svg" class="h-15px logo" />-->
                     <img alt="Logo"
-                        src="<?php echo (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : getenv('APP_LOGO') ?>"
+                        src="<?php echo (ENVIRONMENT === 'development') ?  'assets/media/logos/escudo.jpeg'  : base_url() . getenv('APP_LOGO') ?>"
                         class="h-60px logo" />
                 </a>
                 <!--end::Logo-->
